@@ -1,3 +1,0 @@
-0:0:0:0:0:0:0:1 - - [19/Jun/2021:23:35:04 +0300] "GET /gazete-dergi-otomasyon/index.xhtml HTTP/1.1" 200 402 http-bio-9090-exec-1 242
-0:0:0:0:0:0:0:1 - - [19/Jun/2021:23:35:04 +0300] "GET /gazete-dergi-otomasyon/javax.faces.resource/theme.css.xhtml?ln=primefaces-home HTTP/1.1" 200 18742 http-bio-9090-exec-3 28
-0:0:0:0:0:0:0:1 - - [19/Jun/2021:23:35:04 +0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-9090-exec-4 0
