@@ -7,25 +7,25 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "journal")
+@Table(name = "journal", indexes = {@Index(columnList = "ISSUE_NUMBER") })
 public class Journal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "TYPE")
+    @Column(name = "type")
     private String type;
 
-    @Column(name = "TITLE")
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "DATE")
+    @Column(name = "date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    @Column(name = "FILE_PATH")
+    @Column(name = "file_path")
     private String path;
 
 
@@ -36,13 +36,11 @@ public class Journal {
     @OneToOne
     private Genre genre;
 
-    @Column(name = "ISSUE_NUMBER")
+    @Column(name = "issue_number")
     private int IssueNumber ;
 
 
-    public Journal() {
-
-    }
+    public Journal() { }
 
     public Journal(int id, String type, String title, Date date, String path, Publisher publisher, Genre genre, int issueNumber) {
         this.id = id;

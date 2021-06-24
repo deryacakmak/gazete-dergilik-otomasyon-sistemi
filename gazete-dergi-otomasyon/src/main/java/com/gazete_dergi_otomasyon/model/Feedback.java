@@ -13,7 +13,7 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DATE")
+    @Column(name = "date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
@@ -23,10 +23,10 @@ public class Feedback {
     @OneToOne
     private User  user;
 
-    @Column(name = "CONTENT")
+    @Column(name = "content")
     private String content;
 
-    @Column(name = "RATE")
+    @Column(name = "rate")
     private Long rate;
 
 

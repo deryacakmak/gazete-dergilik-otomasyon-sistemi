@@ -10,13 +10,13 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "GENRE")
-    private String  genre;
+    @Column(name = "genre")
+    private EGenre  genre;
 
     public Genre() {
     }
 
-    public Genre(Long id, String genre) {
+    public Genre(Long id, EGenre genre) {
         this.id = id;
         this.genre = genre;
     }
@@ -30,11 +30,11 @@ public class Genre {
         this.id = id;
     }
 
-    public String getGenre() {
+    public EGenre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(EGenre genre) {
         this.genre = genre;
     }
 }

@@ -12,13 +12,13 @@ public class Announcement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TITLE")
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "CONTENT")
+    @Column(name = "content")
     private String content;
 
-    @Column(name = "PUBLISHING_DATE")
+    @Column(name = "publishing_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date publishingDate;
 

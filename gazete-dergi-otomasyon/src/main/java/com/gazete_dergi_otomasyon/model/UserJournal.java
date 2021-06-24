@@ -21,13 +21,13 @@ public class UserJournal {
     @OneToOne
     private User user;
 
-    @Column(name = "BRACE_PAGE")
+    @Column(name = "brace_page")
     private Long page;
 
-    @Column(name = "FAVORITE")
+    @Column(name = "favorite")
     private Long fav;
 
-    @Column(name = "READ_LATER")
+    @Column(name = "read_later")
     private Long readLater;
 
     public UserJournal() {

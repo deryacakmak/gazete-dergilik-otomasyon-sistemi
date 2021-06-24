@@ -11,11 +11,11 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME")
-    private String  publisherName;
+    @Column(name = "name")
+    private EPublisher  publisherName;
 
 
-    public Publisher(Long id, String publisherName) {
+    public Publisher(Long id, EPublisher publisherName) {
         this.id = id;
         this.publisherName = publisherName;
     }
@@ -31,11 +31,11 @@ public class Publisher {
         this.id = id;
     }
 
-    public String getPublisherName() {
+    public EPublisher getPublisherName() {
         return publisherName;
     }
 
-    public void setPublisherName(String publisherName) {
+    public void setPublisherName(EPublisher publisherName) {
         this.publisherName = publisherName;
     }
 }

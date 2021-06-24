@@ -7,20 +7,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", indexes = { @Index(columnList = "EMAIL")})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "FIRDT_NAME")
+
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(unique = true, name = "EMAIL")
+    @Column(unique = true, name = "email")
     @Email
     private String email;
 
@@ -30,7 +31,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
     public User() {
@@ -77,7 +78,7 @@ public class User {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
+    public Set<Role> getRole() {
         return roles;
     }
 
