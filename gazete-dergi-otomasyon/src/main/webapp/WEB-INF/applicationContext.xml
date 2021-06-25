@@ -12,8 +12,10 @@
     <context:property-placeholder location="classpath:application.properties" />
 
     <context:component-scan  base-package="com.gazete_dergi_otomasyon" />
+    <context:annotation-config/>
+    <context:spring-configured/>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -40,12 +42,12 @@
         </property>
     </bean>
 
+
     <bean id="transactionManager"  class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
     <bean id="persistenceExceptionTranslationPostProcessor"
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
 
 </beans>
