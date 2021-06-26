@@ -1,6 +1,8 @@
 package com.gazete_dergi_otomasyon.service;
 
 import com.gazete_dergi_otomasyon.dao.IUserDao;
+import com.gazete_dergi_otomasyon.model.ERole;
+import com.gazete_dergi_otomasyon.model.Role;
 import com.gazete_dergi_otomasyon.model.User;
 import com.gazete_dergi_otomasyon.exception.AccessException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +17,30 @@ public class AccessService implements IAccessService {
     private IUserDao userDao;
 
     @Override
-    @Transactional(readOnly = true)
     public User login(String email, String password) throws AccessException {
         User user =  this.userDao.findUserByEmail(email);
         if(user != null){
             if (user.getPassword().equals(password)){
                 return user;
             }
-            else{
-                throw new AccessException("Wrong password!");
-            }
+            throw new AccessException("Yanlış şifre! Lütfen şifrenizi kontrol edin.");
         }
-        else{
-            throw new AccessException("There is no user with this email");
+            throw new AccessException("Sisteme kayıtlı mail adresi bulunamadı!");
+
+
+    }
+
+    @Override
+    public void signUp( String firstName, String lastName, String email,String password) throws AccessException {
+        User user =  this.userDao.findUserByEmail(email);
+        if(user != null){
+            throw new AccessException("Bu mail adresi kullanılıyor!");
         }
+            User newUser = new User(firstName, lastName, email, password);
+            Role role = new Role(ERole.ROLE_MEMBER);
+            newUser.getRole().add(role);
+            this.userDao.saveUser(newUser);
+
 
     }
 

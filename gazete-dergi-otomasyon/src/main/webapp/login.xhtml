@@ -10,22 +10,22 @@
             background-repeat: no-repeat;
             background-attachment:fixed;
         }
-
         .headline_id {
             font-weight: bold;
             font-size: 18px;
-
+            text-align: center;
+            width: 100%;
+            height: 600px;
         }
 
     </style>
-
 </h:head>
 <h:body  styleClass="Bimage" >
 
 
 
     <h:form id="LoginForm">
-        <h:panelGrid id="LoginPanelGrid"   columns="3" style="margin:auto;margin-top:10%">
+        <h:panelGrid columns="3" style="margin:auto;margin-top:10%">
 
             <f:facet  class="headline_id" name="header">Giriş Formu <br> </br></f:facet>
 
@@ -33,6 +33,9 @@
             <p:inputText id="email" value="#{loginDto.email}"
                          required="true" requiredMessage="Emailinizi giriniz" label="Email" />
             <p:message for="email" />
+
+
+
             <h:outputLabel  class="headline_id" for="password" value="Şifre: " />
             <p:password id="password" value="#{loginDto.password}"
                         required="true" requiredMessage="Şifre giriniz" label="Şifre"/>

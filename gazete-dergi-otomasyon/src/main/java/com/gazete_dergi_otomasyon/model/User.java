@@ -25,10 +25,11 @@ public class User {
     @Email
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinTable(	name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+            )
     private Set<Role> roles = new HashSet<>();
 
     @Column(name = "password")
@@ -43,6 +44,13 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.roles = roles;
+        this.password = password;
+    }
+
+    public User( String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
         this.password = password;
     }
 

@@ -6,6 +6,7 @@ import com.gazete_dergi_otomasyon.model.User;
 public interface IUserDao {
 
     User findUserByEmail(String email);
+    void saveUser(User user);
 
 
 }

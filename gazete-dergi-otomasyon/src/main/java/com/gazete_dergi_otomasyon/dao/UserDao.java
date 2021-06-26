@@ -1,9 +1,13 @@
 package com.gazete_dergi_otomasyon.dao;
 
 import com.gazete_dergi_otomasyon.model.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +15,7 @@ import java.util.List;
 public class UserDao implements IUserDao{
 
     @Autowired
-     SessionFactory sessionFactory;
-
+    private  SessionFactory sessionFactory;
 
     public UserDao() { }
 
@@ -25,13 +28,12 @@ public class UserDao implements IUserDao{
     }
 
 
-
     @Override
+    @Transactional(readOnly = true)
     public User findUserByEmail(String email) {
         List<User> users = new ArrayList<User>();
-        System.out.println(email);
 
-        users = getSessionFactory().getCurrentSession()
+        users = this.sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE email=?")
                 .setParameter(0, email).list();
 
@@ -42,6 +44,11 @@ public class UserDao implements IUserDao{
         }
     }
 
+    @Override
+    @Transactional
+    public void saveUser(User user) {
+        this.sessionFactory.getCurrentSession().save(user);
+    }
 
 
 }
