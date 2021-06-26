@@ -2,8 +2,11 @@ package com.gazete_dergi_otomasyon.dto;
 
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
 
-@ManagedBean(name = "loginDto")
+@Named("loginDto")
+@RequestScoped
 public class LoginDto {
 
 

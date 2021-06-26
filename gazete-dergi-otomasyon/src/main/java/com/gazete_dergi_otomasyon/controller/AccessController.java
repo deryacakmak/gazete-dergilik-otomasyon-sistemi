@@ -14,7 +14,7 @@ import javax.faces.context.FacesContext;
 public class AccessController {
 
     @Autowired
-    IAccessService accessService;
+     IAccessService accessService;
 
     public String login(LoginDto loginDto){
         try{
@@ -30,6 +30,11 @@ public class AccessController {
     }
 
 
+    public IAccessService getAccessService() {
+        return accessService;
+    }
 
-
+    public void setAccessService(IAccessService accessService) {
+        this.accessService = accessService;
+    }
 }

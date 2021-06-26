@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user", indexes = { @Index(columnList = "EMAIL")})
+@Table(name = "user", indexes = { @Index(columnList = "email")})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

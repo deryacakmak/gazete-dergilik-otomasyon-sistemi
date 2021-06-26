@@ -1,5 +1,6 @@
 package com.gazete_dergi_otomasyon.service;
 
+import com.gazete_dergi_otomasyon.dao.IUserDao;
 import com.gazete_dergi_otomasyon.model.User;
 import com.gazete_dergi_otomasyon.dao.UserDao;
 import com.gazete_dergi_otomasyon.exception.AccessException;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccessService implements IAccessService {
 
     @Autowired
-    UserDao userDao;
+    private IUserDao userDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -32,4 +33,11 @@ public class AccessService implements IAccessService {
 
     }
 
+    public IUserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(IUserDao userDao) {
+        this.userDao = userDao;
+    }
 }

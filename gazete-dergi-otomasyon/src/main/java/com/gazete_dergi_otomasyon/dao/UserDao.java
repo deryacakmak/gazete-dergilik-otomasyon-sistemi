@@ -12,8 +12,10 @@ import java.util.List;
 public class UserDao implements IUserDao{
 
     @Autowired
-    private SessionFactory sessionFactory;
+     SessionFactory sessionFactory;
 
+
+    public UserDao() { }
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
@@ -22,6 +24,8 @@ public class UserDao implements IUserDao{
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
+
 
     @Override
     public User findUserByEmail(String email) {
@@ -37,4 +41,7 @@ public class UserDao implements IUserDao{
             return null;
         }
     }
+
+
+
 }
