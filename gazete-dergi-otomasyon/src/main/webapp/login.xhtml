@@ -2,26 +2,48 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<h:head></h:head>
-<h:body>
+<h:head>
+    <style>
+        .Bimage{
+            background-image:url("resources/images/login.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+        }
+
+        .headline_id {
+            font-weight: bold;
+            font-size: 18px;
+
+        }
+
+    </style>
+
+</h:head>
+<h:body  styleClass="Bimage" >
+
+
+
     <h:form id="LoginForm">
-        <p:panelGrid id="LoginPanelGrid" columns="3" style="margin:auto;margin-top:10%">
-            <f:facet name="header">Giriş Formu</f:facet>
-            <h:outputLabel for="email" value="Email: *" />
+        <h:panelGrid id="LoginPanelGrid"   columns="3" style="margin:auto;margin-top:10%">
+
+            <f:facet  class="headline_id" name="header">Giriş Formu <br> </br></f:facet>
+
+            <h:outputLabel  class="headline_id"  for="email" value="Email: " />
             <p:inputText id="email" value="#{loginDto.email}"
                          required="true" requiredMessage="Emailinizi giriniz" label="Email" />
             <p:message for="email" />
-            <h:outputLabel for="password" value="Şifre: *" />
+            <h:outputLabel  class="headline_id" for="password" value="Şifre: " />
             <p:password id="password" value="#{loginDto.password}"
                         required="true" requiredMessage="Şifre giriniz" label="Şifre"/>
             <p:message for="password" />
-            <br/>
+            <br></br>
             <f:facet name="footer">
                 <p:commandButton type="submit" action="#{accessController.login(loginDto)}" update="LoginForm"
                                  value="Giriş" icon="ui-icon-check" style="margin:0"/>
                 <p:messages></p:messages>
             </f:facet>
-        </p:panelGrid>
+        </h:panelGrid>
     </h:form>
 </h:body>
 </html>
