@@ -29,9 +29,10 @@ public class UserDao implements IUserDao{
     @Override
     public User findUserByEmail(String email) {
         List<User> users = new ArrayList<User>();
+        System.out.println(email);
 
         users = getSessionFactory().getCurrentSession()
-                .createQuery("from user where email=?")
+                .createQuery("FROM User WHERE email=?")
                 .setParameter(0, email).list();
 
         if (users.size() > 0) {
