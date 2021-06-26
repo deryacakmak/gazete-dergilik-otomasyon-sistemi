@@ -41,7 +41,7 @@
     </bean>
 
     <!-- Enable the configuration of transactional behavior based on annotations -->
-    <tx:annotation-driven transaction-manager="txManager"/>
+    <tx:annotation-driven  transaction-manager="txManager"/>
 
     <!-- Transaction Manager is defined -->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

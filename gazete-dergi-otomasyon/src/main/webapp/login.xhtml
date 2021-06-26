@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+    <h:form id="LoginForm">
+        <p:panelGrid id="LoginPanelGrid" columns="3" style="margin:auto;margin-top:10%">
+            <f:facet name="header">Giriş Formu</f:facet>
+            <h:outputLabel for="email" value="Email: *" />
+            <p:inputText id="email" value="#{loginDto.username}"
+                         required="true" requiredMessage="Emailinizi giriniz" label="Email" />
+            <p:message for="email" />
+            <br/>
+            <h:outputLabel for="password" value="Şifre: *" />
+            <p:password id="password" value="#{loginDto.password}"
+                        required="true" requiredMessage="Şifre giriniz" label="Şifre"/>
+            <p:message for="password" />
+            <br/>
+            <f:facet name="footer">
+                <p:commandButton type="submit" action="#{accessController.login(loginDto)}" update="LoginForm"
+                                 value="Giriş" icon="ui-icon-check" style="margin:0"/>
+                <p:messages></p:messages>
+            </f:facet>
+        </p:panelGrid>
+    </h:form>
+</h:body>
+</html>

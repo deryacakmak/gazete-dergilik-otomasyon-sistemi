@@ -2,7 +2,6 @@ package com.gazete_dergi_otomasyon.service;
 
 import com.gazete_dergi_otomasyon.dao.IUserDao;
 import com.gazete_dergi_otomasyon.model.User;
-import com.gazete_dergi_otomasyon.dao.UserDao;
 import com.gazete_dergi_otomasyon.exception.AccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -9,7 +9,6 @@ import javax.inject.Named;
 @RequestScoped
 public class LoginDto {
 
-
     private String email;
     private String password;
 

@@ -2,11 +2,9 @@ package com.gazete_dergi_otomasyon.controller;
 
 import com.gazete_dergi_otomasyon.dto.LoginDto;
 import com.gazete_dergi_otomasyon.exception.AccessException;
-import com.gazete_dergi_otomasyon.service.AccessService;
 import com.gazete_dergi_otomasyon.service.IAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -26,7 +24,7 @@ public class AccessController {
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return "";
         }
-        return "home";
+        return "index";
     }
 
 
