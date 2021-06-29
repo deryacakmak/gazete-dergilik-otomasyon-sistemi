@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class AccessController {
@@ -16,11 +18,13 @@ public class AccessController {
     @Autowired
      private IAccessService accessService;
 
+    public AccessController() {}
+
     public String login(LoginDto loginDto){
         try{
             this.accessService.login(loginDto.getEmail(), loginDto.getPassword());
         }
-        catch (AccessException ex){
+        catch (AccessException | NoSuchAlgorithmException ex){
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     ex.getMessage(),"");
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -33,6 +37,10 @@ public class AccessController {
     public String signUp(SignUpDto signUpDto){
             try{
                 this.accessService.signUp(signUpDto.getFirstName(),signUpDto.getLastName(), signUpDto.getEmail(), signUpDto.getPassword());
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                       "Kayıt Olma İşlemi Başarılı","");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                TimeUnit.SECONDS.sleep(1);
             }
             catch (AccessException ex){
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -46,8 +54,16 @@ public class AccessController {
                 FacesContext.getCurrentInstance().addMessage(null, msg);
                 return "";
             }
+            catch (NoSuchAlgorithmException ex) {
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                        "Lütfen başka şifre deneyin", "");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                return "";
 
-        return "login";
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "login";
     }
 
 

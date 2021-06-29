@@ -4,7 +4,7 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-   <title>Registration</title>
+   <title>Kayıt</title>
 
    <style>
       .Bimage{
@@ -18,7 +18,8 @@
          font-size: 18px;
          text-align: center;
          width: 100%;
-         height: 600px;
+         height: 500px;
+
       }
 
    </style>
@@ -30,27 +31,27 @@
 
          <f:facet  class="headline_id" name="header">Kayıt Formu <br> </br></f:facet>
 
-         <h:outputLabel  class="headline_id"  for="fistName" value="İsim: " />
-         <p:inputText id="fistName" value="#{signUpDto.firstName}"
-                      required="true" requiredMessage="İsminizi giriniz" label="İsim" />
+         <h:outputLabel  class="headline_id"  for="fistName"   />
+         <p:inputText id="fistName" value="#{signUpDto.firstName}" placeholder="isim"
+                      required="true" requiredMessage="İsminizi giriniz" />
          <p:message for="fistName" />
 
 
 
-         <h:outputLabel  class="headline_id"  for="lastName" value="Soyisim:"/>
-         <p:inputText id="lastName" value="#{signUpDto.lastName}"
-                      required="true" requiredMessage="Soyisminizi girin"  label="Soyisim: "/>
+         <h:outputLabel  class="headline_id"  for="lastName" />
+         <p:inputText id="lastName" value="#{signUpDto.lastName}" placeholder="Soyisim"
+                      required="true" requiredMessage="Soyisminizi girin" />
          <p:message for="lastName" />
 
 
-         <h:outputLabel  class="headline_id" for="email" value="Email:"/>
-         <p:inputText    id="email" value="#{signUpDto.email}" label="Email"  validatorMessage="Geçersiz mail adresi formatı"
+         <h:outputLabel  class="headline_id" for="email" />
+         <p:inputText    id="email" value="#{signUpDto.email}"  placeholder="Email" validatorMessage="Geçersiz mail adresi formatı"
                       required="true" requiredMessage="Emailizini girin." />
          <p:message for="email" />
 
 
-         <h:outputLabel  class="headline_id" for="password" value="Şifre:"/>
-         <p:password id="password" value="#{signUpDto.password}" label="Şifre"
+         <h:outputLabel  class="headline_id" for="password"/>
+         <p:password id="password" value="#{signUpDto.password}" placeholder="Şifre"
                      required="true" requiredMessage="Şifrenizi girin." />
          <p:message for="password" />
 

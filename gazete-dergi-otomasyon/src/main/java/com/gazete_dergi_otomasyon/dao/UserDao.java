@@ -1,7 +1,6 @@
 package com.gazete_dergi_otomasyon.dao;
 
 import com.gazete_dergi_otomasyon.model.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

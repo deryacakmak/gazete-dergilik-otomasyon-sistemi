@@ -20,6 +20,10 @@ public class Publisher {
         this.publisherName = publisherName;
     }
 
+    public Publisher(EPublisher publisherName) {
+        this.publisherName = publisherName;
+    }
+
     public Publisher() { }
 
 

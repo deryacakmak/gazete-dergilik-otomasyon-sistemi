@@ -2,10 +2,10 @@ package com.gazete_dergi_otomasyon.model;
 
 public enum EPublisher {
 
-    POSTA("posta"),
-    VOGUE("vogue"),
-    ELLE("elle"),
-    TIME("time" );
+    POSTA("Posta"),
+    VOGUE("Vogue"),
+    ELLE("Elle"),
+    TIME("Time" );
 
     public  final String  label;
 

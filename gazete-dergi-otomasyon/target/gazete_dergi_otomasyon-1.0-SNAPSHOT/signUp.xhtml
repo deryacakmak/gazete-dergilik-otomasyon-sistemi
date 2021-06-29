@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+   <title>Kayıt</title>
+
+   <style>
+      .Bimage{
+         background-image:url("resources/images/login.jpg");
+         background-size: cover;
+         background-repeat: no-repeat;
+         background-attachment:fixed;
+      }
+      .headline_id {
+         font-weight: bold;
+         font-size: 18px;
+         text-align: center;
+         width: 100%;
+         height: 500px;
+
+      }
+
+   </style>
+</h:head>
+<h:body styleClass="Bimage" >
+<h:form id="registrationForm">
+
+      <h:panelGrid columns="3" style="margin:auto;margin-top:10%">
+
+         <f:facet  class="headline_id" name="header">Kayıt Formu <br> </br></f:facet>
+
+         <h:outputLabel  class="headline_id"  for="fistName"   />
+         <p:inputText id="fistName" value="#{signUpDto.firstName}" placeholder="isim"
+                      required="true" requiredMessage="İsminizi giriniz" />
+         <p:message for="fistName" />
+
+
+
+         <h:outputLabel  class="headline_id"  for="lastName" />
+         <p:inputText id="lastName" value="#{signUpDto.lastName}" placeholder="Soyisim"
+                      required="true" requiredMessage="Soyisminizi girin" />
+         <p:message for="lastName" />
+
+
+         <h:outputLabel  class="headline_id" for="email" />
+         <p:inputText    id="email" value="#{signUpDto.email}"  placeholder="Email" validatorMessage="Geçersiz mail adresi formatı"
+                      required="true" requiredMessage="Emailizini girin." />
+         <p:message for="email" />
+
+
+         <h:outputLabel  class="headline_id" for="password"/>
+         <p:password id="password" value="#{signUpDto.password}" placeholder="Şifre"
+                     required="true" requiredMessage="Şifrenizi girin." />
+         <p:message for="password" />
+
+         <br></br>
+
+         <f:facet name="footer">
+            <p:commandButton type="submit" action="#{accessController.signUp(signUpDto)}" update="registrationForm"
+                             value="Kaydol" icon="ui-icon-check" style="margin:0"/>
+            <p:messages></p:messages>
+         </f:facet>
+
+      </h:panelGrid>
+</h:form>
+</h:body>
+</html>

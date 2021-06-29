@@ -16,7 +16,7 @@ public class Journal {
     private int id;
 
     @Column(name = "type")
-    private String type;
+    private EType type;
 
     @Column(name = "title")
     private String title;
@@ -37,12 +37,12 @@ public class Journal {
     private Genre genre;
 
     @Column(name = "issue_number")
-    private int IssueNumber ;
+    private String IssueNumber ;
 
 
     public Journal() { }
 
-    public Journal(int id, String type, String title, Date date, String path, Publisher publisher, Genre genre, int issueNumber) {
+    public Journal(int id, EType type, String title, Date date, String path, Publisher publisher, Genre genre, String issueNumber) {
         this.id = id;
         this.type = type;
         this.title = title;
@@ -53,6 +53,18 @@ public class Journal {
         IssueNumber = issueNumber;
     }
 
+    public Journal(EType type, String title, Date date, String path, Publisher publisher, Genre genre, String issueNumber) {
+        this.type = type;
+        this.title = title;
+        this.date = date;
+        this.path = path;
+        this.publisher = publisher;
+        this.genre = genre;
+        IssueNumber = issueNumber;
+    }
+
+
+
     public int getId() {
         return id;
     }
@@ -61,11 +73,11 @@ public class Journal {
         this.id = id;
     }
 
-    public String getType() {
+    public EType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EType type) {
         this.type = type;
     }
 
@@ -109,11 +121,11 @@ public class Journal {
         this.genre = genre;
     }
 
-    public int getIssueNumber() {
+    public String getIssueNumber() {
         return IssueNumber;
     }
 
-    public void setIssueNumber(int issueNumber) {
+    public void setIssueNumber(String issueNumber) {
         IssueNumber = issueNumber;
     }
 }
