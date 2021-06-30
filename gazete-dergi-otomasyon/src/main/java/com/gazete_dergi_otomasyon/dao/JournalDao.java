@@ -1,6 +1,7 @@
 package com.gazete_dergi_otomasyon.dao;
 
 
+import com.gazete_dergi_otomasyon.model.Journal;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,12 @@ public class JournalDao implements IJournalDao{
     public void saveJournal(com.gazete_dergi_otomasyon.model.Journal journal) {
         this.sessionFactory.getCurrentSession().save(journal);
     }
+
+    @Override
+    @Transactional
+    public void removeJournal(Journal journal) {
+        this.sessionFactory.getCurrentSession().delete(journal);
+    }
+
+
 }

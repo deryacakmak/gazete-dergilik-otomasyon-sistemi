@@ -32,11 +32,15 @@ public class JournalController {
         this.journalService = journalService;
     }
 
-    public void addJournal(UploadJournalDto uploadJournalDto){
+    public String addJournal(UploadJournalDto uploadJournalDto){
         Publisher publisher = new Publisher(uploadJournalDto.getPublisher());
         Genre genre = new Genre(uploadJournalDto.getGenre());
         Journal journal = new Journal(EType.valueOf(uploadJournalDto.getType().toUpperCase(Locale.ROOT)), uploadJournalDto.getTitle(), uploadJournalDto.getDate(),uploadJournalDto.getName(), publisher, genre, uploadJournalDto.getIssueNumber());
         this.journalService.addJournal(journal);
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                "Yayın ekleme işlemi başarılı!","");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        return "";
     }
 
 
