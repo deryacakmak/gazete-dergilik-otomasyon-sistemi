@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class AdminService implements IAdminService{
+public class JournalService implements IJournalService {
 
 
     @Autowired
     private IJournalDao journalDao;
 
-    public AdminService() {
+    public JournalService() {
     }
 
     public IJournalDao getJournalDao() {

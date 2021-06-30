@@ -27,10 +27,11 @@ public class PublisherDao implements IPublisherDao {
     @Override
     @Transactional(readOnly = true)
     public List<Publisher> getAllPublisher() {
-        return this.getSessionFactory().getCurrentSession().createQuery("FROM Publisher").list();
+        return this.getSessionFactory().getCurrentSession().createQuery("SELECT publisherName FROM Publisher").list();
     }
 
     @Override
+    @Transactional
     public void savePublisher(Publisher publisher) {
         this.sessionFactory.getCurrentSession().save(publisher);
     }

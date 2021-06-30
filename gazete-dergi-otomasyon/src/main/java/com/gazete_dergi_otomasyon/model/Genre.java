@@ -11,17 +11,17 @@ public class Genre {
     private Long id;
 
     @Column(name = "genre")
-    private EGenre  genre;
+    private String  genre;
 
     public Genre() {
     }
 
-    public Genre(Long id, EGenre genre) {
+    public Genre(Long id, String genre) {
         this.id = id;
         this.genre = genre;
     }
 
-    public Genre(EGenre genre) {
+    public Genre(String genre) {
         this.genre = genre;
     }
 
@@ -35,11 +35,11 @@ public class Genre {
         this.id = id;
     }
 
-    public EGenre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(EGenre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 }

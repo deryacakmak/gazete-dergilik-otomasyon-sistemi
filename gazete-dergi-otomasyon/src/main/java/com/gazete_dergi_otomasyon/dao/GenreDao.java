@@ -27,7 +27,7 @@ public class GenreDao implements IGenreDao{
 
     @Override
     public List<Genre> getAllGenre() {
-        return this.sessionFactory.getCurrentSession().createQuery("FROM Genre").list();
+        return this.sessionFactory.getCurrentSession().createQuery("SELECT genre FROM Genre").list();
     }
 
     @Override

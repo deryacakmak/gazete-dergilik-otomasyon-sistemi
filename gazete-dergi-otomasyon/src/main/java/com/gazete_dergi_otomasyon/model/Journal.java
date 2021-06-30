@@ -29,11 +29,11 @@ public class Journal {
     private String path;
 
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Publisher publisher;
 
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Genre genre;
 
     @Column(name = "issue_number")

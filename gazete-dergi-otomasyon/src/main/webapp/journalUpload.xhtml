@@ -15,57 +15,48 @@ xmlns:p="http://primefaces.org/ui"
             background-attachment:fixed;
         }
 
-        .search {
-            width: 20em;
-            height: 2em;
-        }
-
     </style>
 </h:head>
 <h:body styleClass="Bimage">
 <h:form id="uploadJournalForm" enctype="multipart/form-data" >
 
     <h:panelGrid columns="1" style="margin:auto;margin-top:5%">
+
         <p:selectOneRadio id="console" value="#{uploadJournalDto.type}" unselectable="true">
-            <f:selectItem itemLabel="Dergi" itemValue="Dergi" />
-            <f:selectItem itemLabel="Gazete" itemValue="Gazete" />
+            <f:selectItem itemLabel="DERGİ" itemValue="Dergi" />
+            <f:selectItem itemLabel="GAZETE" itemValue="Gazete" />
         </p:selectOneRadio>
 
-        <div class="p-field p-grid">
+
             <p:outputLabel for="title" styleClass="p-col-fixed" style="width:100px"/>
             <div class="p-col">
                 <p:inputText id="title"   value="#{uploadJournalDto.title}" placeholder="Yayın Başlığı" />
             </div>
-        </div>
 
 
-        <div class="p-field p-col-12 p-md-4">
             <p:outputLabel for="event"/>
             <p:datePicker id="event" value="#{uploadJournalDto.date}" placeholder="Yayın Tarihini Seçin">
             </p:datePicker>
-        </div>
 
-        <div class="p-field p-grid">
+
             <p:outputLabel for="issueNumber" styleClass="p-col-fixed" style="width:100px"/>
             <div class="p-col">
                 <p:inputText id="issueNumber"  value="#{uploadJournalDto.issueNumber}" placeholder="Yayın Sayısı"/>
             </div>
-        </div>
 
-        <div class="p-field p-col-12 p-md-4">
+
+
             <p:outputLabel for="@next" value="Yayıncı"/>
             <p:selectOneMenu id="lazy" value="#{uploadJournalDto.publisher}" dynamic="true" style="width:200px">
                 <f:selectItem itemLabel="Yayıncı Seç" itemValue=" "/>
                 <f:selectItems value="#{publisherController.getAllPublisher()}"/>
             </p:selectOneMenu>
+
             <p:outputLabel for="yayıncı" styleClass="ui-sr-only"/>
             <p:inputText id="yayıncı" value="#{uploadJournalDto.publisher}"  placeholder="Yeni Yayıncı Ekle"/>
             <p:commandButton  value="Ekle" action="#{publisherController.savePublisher(uploadJournalDto)}" />
 
 
-        </div>
-
-        <div class="p-field p-col-12 p-md-4">
             <p:outputLabel for="@next" value="Yayın Türü"/>
             <p:selectOneMenu id="lazy2" value="#{uploadJournalDto.genre}" dynamic="true" style="width:200px">
                 <f:selectItem itemLabel="Yayın Türü Seçin" itemValue=" "/>
@@ -73,12 +64,18 @@ xmlns:p="http://primefaces.org/ui"
             </p:selectOneMenu>
             <p:outputLabel for="tür" styleClass="ui-sr-only"/>
             <p:inputText id="tür"  value="#{uploadJournalDto.genre}" placeholder="Yeni Tür Ekle"/>
-            <p:commandButton  value="Ekle" action="#{genreController.addGenre(uploadJournalDto)}" />
-        </div>
+        <p:commandButton  value="Ekle" action="#{genreController.addGenre(uploadJournalDto)}" />
+        <p:outputLabel value = "Dosya Yükle"/>
+
+        <h:form enctype="multipart/form-data">
 
             <p:fileUpload value="#{uploadJournalDto.file}" mode="simple" skinSimple="true"/>
-            <p:commandButton value="Submit" ajax="false" actionListener="#{fileUploadedController.upload(uploadJournalDto)}" styleClass="p-mt-3 ui-button-outlined p-d-block"/>
+            <p:commandButton value="Yükle" ajax="false" actionListener="#{fileUploadedController.upload(uploadJournalDto)}"/>
+        </h:form>
 
+        <p:commandButton value="Yayın Ekle" ajax="false" actionListener="#{journalController.addJournal(uploadJournalDto)}"
+                        style="top: 25px;background: steelblue; color: white;margin-left: 15%" />
+            <p:messages></p:messages>
 
     </h:panelGrid>
 

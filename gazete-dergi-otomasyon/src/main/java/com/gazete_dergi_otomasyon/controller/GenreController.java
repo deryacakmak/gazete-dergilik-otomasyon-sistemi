@@ -2,7 +2,6 @@ package com.gazete_dergi_otomasyon.controller;
 
 
 import com.gazete_dergi_otomasyon.dto.UploadJournalDto;
-import com.gazete_dergi_otomasyon.model.EGenre;
 import com.gazete_dergi_otomasyon.model.Genre;
 import com.gazete_dergi_otomasyon.service.IGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class GenreController {
     }
 
     public String addGenre(UploadJournalDto uploadJournalDto){
-        Genre genre = new Genre(EGenre.valueOf(uploadJournalDto.getGenre()));
+        Genre genre = new Genre(uploadJournalDto.getGenre());
         this.genreService.saveGenre(genre);
 
         return "";

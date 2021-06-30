@@ -1,12 +1,13 @@
 package com.gazete_dergi_otomasyon.controller;
 
 import com.gazete_dergi_otomasyon.dto.UploadJournalDto;
-import com.gazete_dergi_otomasyon.model.EPublisher;
 import com.gazete_dergi_otomasyon.model.Publisher;
 import com.gazete_dergi_otomasyon.service.IPublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.List;
 
 @Controller
@@ -31,8 +32,11 @@ public class PublisherController {
     }
 
     public String savePublisher(UploadJournalDto uploadJournalDto){
-        Publisher publisher = new Publisher(EPublisher.valueOf(uploadJournalDto.getPublisher()));
+        Publisher publisher = new Publisher(uploadJournalDto.getPublisher());
         this.publisherService.savePublisher(publisher);
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                "Yeni yayıncı eklendi!", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
         return "";
     }
 

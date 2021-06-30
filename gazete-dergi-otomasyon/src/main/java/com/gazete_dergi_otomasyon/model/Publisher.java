@@ -12,15 +12,15 @@ public class Publisher {
     private Long id;
 
     @Column(name = "name")
-    private EPublisher  publisherName;
+    private String  publisherName;
 
 
-    public Publisher(Long id, EPublisher publisherName) {
+    public Publisher(Long id, String publisherName) {
         this.id = id;
         this.publisherName = publisherName;
     }
 
-    public Publisher(EPublisher publisherName) {
+    public Publisher(String publisherName) {
         this.publisherName = publisherName;
     }
 
@@ -35,11 +35,11 @@ public class Publisher {
         this.id = id;
     }
 
-    public EPublisher getPublisherName() {
+    public String getPublisherName() {
         return publisherName;
     }
 
-    public void setPublisherName(EPublisher publisherName) {
+    public void setPublisherName(String publisherName) {
         this.publisherName = publisherName;
     }
 }

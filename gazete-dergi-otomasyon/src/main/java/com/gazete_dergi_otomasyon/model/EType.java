@@ -2,7 +2,7 @@ package com.gazete_dergi_otomasyon.model;
 
 public enum EType {
 
-    DERGİ("Dergi"),
+    DERGI("Dergi"),
     GAZETE("Gazete");
 
     public  final String  label;

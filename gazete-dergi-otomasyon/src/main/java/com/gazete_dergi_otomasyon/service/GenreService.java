@@ -34,6 +34,7 @@ public class GenreService implements IGenreService {
     }
 
     @Override
+    @Transactional
     public void saveGenre(Genre genre) {
             this.genreDao.saveGenre(genre);
     }
