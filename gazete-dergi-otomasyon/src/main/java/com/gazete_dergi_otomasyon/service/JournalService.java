@@ -5,6 +5,8 @@ import com.gazete_dergi_otomasyon.model.Journal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class JournalService implements IJournalService {
@@ -28,4 +30,21 @@ public class JournalService implements IJournalService {
     public void addJournal(Journal journal) {
         this.journalDao.saveJournal(journal);
     }
+
+    @Override
+    public void removeJournal(Journal journal) {
+        this.journalDao.removeJournal(journal);
+    }
+
+    @Override
+    public void updateJournal(Journal journal) {
+    this.journalDao.updateJournal(journal);
+    }
+
+    @Override
+    public List<Journal> getAllJournal() {
+        return this.journalDao.getAllJournal();
+    }
+
+
 }

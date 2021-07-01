@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class JournalDao implements IJournalDao{
 
@@ -35,6 +37,18 @@ public class JournalDao implements IJournalDao{
     @Transactional
     public void removeJournal(Journal journal) {
         this.sessionFactory.getCurrentSession().delete(journal);
+    }
+
+    @Override
+    @Transactional
+    public void updateJournal(Journal journal) {
+        this.sessionFactory.getCurrentSession().update(journal);
+    }
+
+    @Override
+    @Transactional
+    public List<Journal> getAllJournal() {
+        return this.sessionFactory.getCurrentSession().createQuery("FROM Journal").list();
     }
 
 

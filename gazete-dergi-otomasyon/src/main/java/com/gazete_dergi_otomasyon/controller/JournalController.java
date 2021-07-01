@@ -4,14 +4,11 @@ package com.gazete_dergi_otomasyon.controller;
 import com.gazete_dergi_otomasyon.dto.UploadJournalDto;
 import com.gazete_dergi_otomasyon.model.*;
 import com.gazete_dergi_otomasyon.service.IJournalService;
-import org.apache.commons.io.FilenameUtils;
-import org.primefaces.event.FileUploadEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import java.io.*;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -42,6 +39,17 @@ public class JournalController {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         return "";
     }
+
+    public List<Journal> getAllJournal(){
+        return this.journalService.getAllJournal();
+    }
+
+    public void removeJournal(Journal journal){
+        this.journalService.removeJournal(journal);
+    }
+
+
+
 
 
 
