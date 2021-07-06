@@ -18,17 +18,9 @@ public class UserDao implements IUserDao{
 
     public UserDao() { }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
 
     @Override
-    @Transactional(readOnly = true)
     public User findUserByEmail(String email) {
         List<User> users = new ArrayList<User>();
 
@@ -44,7 +36,6 @@ public class UserDao implements IUserDao{
     }
 
     @Override
-    @Transactional
     public void saveUser(User user) {
         this.sessionFactory.getCurrentSession().save(user);
     }

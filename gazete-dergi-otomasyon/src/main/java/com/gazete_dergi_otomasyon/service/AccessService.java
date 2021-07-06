@@ -7,6 +7,8 @@ import com.gazete_dergi_otomasyon.model.User;
 import com.gazete_dergi_otomasyon.exception.AccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +23,7 @@ public class AccessService implements IAccessService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User login(String email, String password) throws AccessException, NoSuchAlgorithmException {
         User user =  this.userDao.findUserByEmail(email);
         if(user != null){
@@ -33,6 +36,7 @@ public class AccessService implements IAccessService {
     }
 
     @Override
+    @Transactional(rollbackFor = AccessException.class)
     public void signUp( String firstName, String lastName, String email,String password) throws AccessException, NoSuchAlgorithmException {
         User user =  this.userDao.findUserByEmail(email);
         if(user != null){
@@ -50,11 +54,4 @@ public class AccessService implements IAccessService {
         return new BigInteger(1,m.digest()).toString(16);
     }
 
-    public IUserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(IUserDao userDao) {
-        this.userDao = userDao;
-    }
 }

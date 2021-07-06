@@ -22,14 +22,27 @@
 
       }
 
+      .toggle-password {
+         float: right;
+         cursor: pointer;
+         margin-right: 10px;
+         margin-top: -25px;
+      }
+
    </style>
 </h:head>
 <h:body styleClass="Bimage" >
 <h:form id="registrationForm">
 
-      <h:panelGrid columns="3" style="margin:auto;margin-top:10%">
+      <h:panelGrid  columns="3" style="margin:auto;margin-top:10%; "  styleClass="loginPanel" >
 
-         <f:facet  class="headline_id" name="header">Kayıt Formu <br> </br></f:facet>
+
+         <p:growl id="growl" showDetail="true" sticky="true">
+            <p:autoUpdate />
+         </p:growl>
+
+         <h2 style="margin-left: 25px">KAYIT FORMU</h2> <p:spacer
+         ></p:spacer>
 
          <h:outputLabel  class="headline_id"  for="fistName"   />
          <p:inputText id="fistName" value="#{signUpDto.firstName}" placeholder="isim"
@@ -52,7 +65,10 @@
 
          <h:outputLabel  class="headline_id" for="password"/>
          <p:password id="password" value="#{signUpDto.password}" placeholder="Şifre"
-                     required="true" requiredMessage="Şifrenizi girin." />
+                     required="true" requiredMessage="Şifrenizi girin."  feedback="true" />
+
+
+
          <p:message for="password" />
 
          <br></br>
@@ -60,10 +76,10 @@
          <f:facet name="footer">
             <p:commandButton type="submit" action="#{accessController.signUp(signUpDto)}" update="registrationForm"
                              value="Kaydol" icon="ui-icon-check" style="margin:0"/>
-            <p:messages></p:messages>
-         </f:facet>
 
+         </f:facet>
       </h:panelGrid>
+
 </h:form>
 </h:body>
 </html>

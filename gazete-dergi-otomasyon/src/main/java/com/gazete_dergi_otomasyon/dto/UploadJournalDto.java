@@ -2,13 +2,12 @@ package com.gazete_dergi_otomasyon.dto;
 
 import org.primefaces.model.file.UploadedFile;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import java.util.Date;
 
-
-
 @Named("uploadJournalDto")
-@RequestScoped
+@ViewScoped
 public class UploadJournalDto {
 
     private String title;
@@ -18,9 +17,28 @@ public class UploadJournalDto {
     private Date date;
     private String issueNumber;
     private UploadedFile file;
-    private String name;
+    private String fileName;
+    private String newPublisher;
+    private String newGenre;
 
     public UploadJournalDto() {
+    }
+
+
+    public String getNewPublisher() {
+        return newPublisher;
+    }
+
+    public void setNewPublisher(String newPublisher) {
+        this.newPublisher = newPublisher;
+    }
+
+    public String getNewGenre() {
+        return newGenre;
+    }
+
+    public void setNewGenre(String newGenre) {
+        this.newGenre = newGenre;
     }
 
     public String getTitle() {
@@ -79,16 +97,12 @@ public class UploadJournalDto {
         this.file = file;
     }
 
-    public String getName() {
-        return name;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
-
-
-
-
 
 }

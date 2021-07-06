@@ -8,4 +8,5 @@ public interface IPublisherDao {
 
     List<Publisher> getAllPublisher();
     void savePublisher(Publisher publisher);
+    Publisher getPublisherByName(String  name);
 }

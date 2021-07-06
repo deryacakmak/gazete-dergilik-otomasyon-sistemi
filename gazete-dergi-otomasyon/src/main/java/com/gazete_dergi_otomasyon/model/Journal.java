@@ -1,7 +1,5 @@
 package com.gazete_dergi_otomasyon.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -22,18 +20,18 @@ public class Journal {
     private String title;
 
     @Column(name = "date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @Column(name = "file_path")
     private String path;
 
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Publisher publisher;
 
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Genre genre;
 
     @Column(name = "issue_number")

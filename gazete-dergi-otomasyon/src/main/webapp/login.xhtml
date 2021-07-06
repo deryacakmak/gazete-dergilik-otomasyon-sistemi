@@ -18,7 +18,14 @@
         <h:form id="LoginForm">
             <h:panelGrid columns="3" style="margin:auto;margin-top:10%">
 
-                <f:facet  class="headline_id" name="header">Giriş Formu <br> </br></f:facet>
+                <p:growl id="growl" showDetail="true" sticky="true">
+                    <p:autoUpdate />
+                </p:growl>
+
+                  <h2 style=" font-family: Garamond">GİRİŞ FORMU</h2>
+
+                <p:spacer>
+            </p:spacer>
 
                 <h:outputLabel  class="headline_id"  for="email" />
                 <p:inputText id="email" value="#{loginDto.email}"
@@ -35,7 +42,6 @@
                                      value="Giriş"  style="background: steelblue; color: white"/>
 
                     <p:button  type="button" value="Kaydol" outcome="signUp" style="margin-left:5px;"/>
-                    <p:messages></p:messages>
                 </f:facet>
             </h:panelGrid>
         </h:form>

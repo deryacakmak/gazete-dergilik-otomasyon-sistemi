@@ -15,11 +15,13 @@ xmlns:p="http://primefaces.org/ui">
         }
 
     </style>
+
 </h:head>
 <h:body styleClass="Bimage">
 <h:form id="uploadJournalForm" enctype="multipart/form-data" >
 
     <h:panelGrid columns="1" style="margin:auto;margin-top:5%">
+        <p:growl id="msgs" showDetail="true" />
 
         <f:facet  name="header">Yayın Kaydetme Formu <br> </br></f:facet>
 
@@ -45,38 +47,35 @@ xmlns:p="http://primefaces.org/ui">
 
 
 
-
             <p:outputLabel for="@next" value="Yayıncı" />
-            <p:selectOneMenu id="lazy" value="#{uploadJournalDto.publisher}" dynamic="true" style="width:200px">
+        <p:outputLabel for="yayıncı" styleClass="ui-sr-only"/>
+            <p:selectOneMenu id="lazy" value="#{uploadJournalDto.publisher}"  style="width:200px">
                 <f:selectItem itemLabel="Yayıncı Seç" itemValue=" "/>
                 <f:selectItems value="#{publisherController.getAllPublisher()}"/>
             </p:selectOneMenu>
-
-            <p:outputLabel for="yayıncı" styleClass="ui-sr-only"/>
-            <p:inputText id="yayıncı" value="#{uploadJournalDto.publisher}"  placeholder="Yeni Yayıncı Ekle"/>
+        <p:inputText id="yayıncı" value="#{uploadJournalDto.newPublisher}"  placeholder="Yeni Yayıncı Ekle" />
 
 
-            <p:outputLabel for="@next" value="Yayın Türü"/>
+
+        <p:outputLabel for="@next" value="Yayın Türü"/>
+            <p:outputLabel for="tür" styleClass="ui-sr-only"/>
+
             <p:selectOneMenu id="lazy2" value="#{uploadJournalDto.genre}" dynamic="true" style="width:200px">
                 <f:selectItem itemLabel="Yayın Türü Seçin" itemValue=" "/>
                 <f:selectItems value="#{genreController.getAllGenre()}"/>
             </p:selectOneMenu>
-
-            <p:outputLabel for="tür" styleClass="ui-sr-only"/>
-            <p:inputText id="tür"  value="#{uploadJournalDto.genre}" placeholder="Yeni Tür Ekle"/>
+        <p:inputText id="tür"  value="#{uploadJournalDto.newGenre}" placeholder="Yeni Tür Ekle" />
 
         <p:outputLabel value = "Dosya Yükle"/>
 
         <h:form enctype="multipart/form-data">
 
             <p:fileUpload value="#{uploadJournalDto.file}" mode="simple" skinSimple="true"/>
-            <p:commandButton value="Yükle" ajax="false" action="#{fileUploadedController.upload(uploadJournalDto)}"  update="uploadJournalForm"/>
+            <p:commandButton value="Yükle" ajax="false" action="#{journalController.uploadJournal(uploadJournalDto.file, uploadJournalDto.issueNumber)}"/>
         </h:form>
-
         <p:commandButton type="Submit" action="#{journalController.addJournal(uploadJournalDto)}" update="uploadJournalForm"
                          value="Yayın Ekle"  style="top: 10px;background: steelblue; color: white;margin-left: 15%"/>
 
-        <p:messages></p:messages>
 
     </h:panelGrid>
 </h:form>

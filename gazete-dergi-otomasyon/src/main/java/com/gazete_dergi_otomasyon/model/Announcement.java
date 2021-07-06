@@ -19,7 +19,7 @@ public class Announcement {
     private String content;
 
     @Column(name = "publishing_date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date publishingDate;
 
     @OneToOne
@@ -33,6 +33,12 @@ public class Announcement {
         this.content = content;
         this.publishingDate = publishingDate;
         this.publisher = publisher;
+    }
+
+    public Announcement(String title, String content) {
+        this.title = title;
+        this.content = content;
+
     }
 
     public Long getId() {

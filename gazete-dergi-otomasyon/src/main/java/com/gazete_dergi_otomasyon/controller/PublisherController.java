@@ -19,13 +19,6 @@ public class PublisherController {
     public PublisherController() {
     }
 
-    public IPublisherService getPublisherService() {
-        return publisherService;
-    }
-
-    public void setPublisherService(IPublisherService publisherService) {
-        this.publisherService = publisherService;
-    }
 
     public List<Publisher> getAllPublisher(){
         return this.publisherService.getAllPublisher();

@@ -19,34 +19,23 @@ public class JournalDao implements IJournalDao{
     public JournalDao() {
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Override
-    @Transactional
     public void saveJournal(com.gazete_dergi_otomasyon.model.Journal journal) {
         this.sessionFactory.getCurrentSession().save(journal);
     }
 
     @Override
-    @Transactional
     public void removeJournal(Journal journal) {
         this.sessionFactory.getCurrentSession().delete(journal);
     }
 
     @Override
-    @Transactional
     public void updateJournal(Journal journal) {
         this.sessionFactory.getCurrentSession().update(journal);
     }
 
     @Override
-    @Transactional
     public List<Journal> getAllJournal() {
         return this.sessionFactory.getCurrentSession().createQuery("FROM Journal").list();
     }

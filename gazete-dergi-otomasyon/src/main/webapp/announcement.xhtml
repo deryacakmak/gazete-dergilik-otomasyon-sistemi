@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+
+>
+
+<h:head>
+    <title>Announcement Show</title>
+    <style type="text/css">
+        .BImage{
+            background-image:url("resources/images/up9.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+        }
+
+        .ui-datatable .ui-paginator {
+            background:   scroll 50% 30% transparent;
+            border:0;
+        }
+
+    </style>
+</h:head>
+<h:body styleClass="BImage">
+
+
+    <h:form id="announcementTableForm">
+        <p:growl id="msgs" showDetail="true" />
+
+        <h:panelGrid style="margin:auto;margin-top:10%; width: 75%" >
+
+            <p:dataTable id= "announcementTable" var="announcement" value="#{announcementController.allAnnouncement}" rows="10"  editable="true"
+                         emptyMessage = "Kayıt Bulunamadı"
+                         style="text-align:center;padding:12px; align-content: unset"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord}/ {totalRecords} kayıt"
+                         rowsPerPageTemplate="5,10,{ShowAll|'HEPSİ'}"
+                         overflow-x= "auto" >
+
+                <p:ajax event="rowEdit" listener="#{announcementController.updateAnnouncement(announcement, announcementEditDto)}"  update=":announcementTableForm:msgs" />
+
+                <p:column headerText="Başlık">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{announcement.title}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{announcementEditDto.title}" style="width:100%" placeholder= "#{announcement.title}"
+                        /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="İçerik">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{announcement.content}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{announcementEditDto.context}" style="width:100%" placeholder= "#{announcement.content}"
+                        /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Tarihi">
+                    <p:cellEditor disabled="true">
+                        <f:facet name="output"><h:outputText value="#{announcement.publishingDate}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:10rem">
+                    <p:column headerText="Actions">
+                        <p:rowEditor/>
+                        <p:commandButton
+                                style="margin-top: 0px"
+                                icon="ui-icon-trash"
+                                title="Yayını sil"
+                                action="#{announcementController.deleteAnnouncement(announcement)}"
+                                update="announcementTableForm">
+                            <p:confirm header="Confirmation"
+                                       message="Silmek istediğinize emin misiniz?"
+                                       icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                    </p:column>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:commandButton ajax="false" value="Add new row" process="@this" update="announcementTableForm"
+                             action="#{announcementController.onAddNew()}" oncomplete="PF('announcementTable').addRow();"/>
+
+
+
+
+            <p:confirmDialog global="true">
+                <p:commandButton value="Evet" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                <p:commandButton value="Hayır" type="button"
+                                 styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
+
+        </h:panelGrid>
+
+    </h:form>
+
+
+</h:body  >
+</html>

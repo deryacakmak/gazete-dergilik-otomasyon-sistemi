@@ -8,4 +8,6 @@ public interface IGenreDao {
 
     List<Genre> getAllGenre();
     void saveGenre(Genre genre);
+    Genre getGenreByName(String name);
+
 }

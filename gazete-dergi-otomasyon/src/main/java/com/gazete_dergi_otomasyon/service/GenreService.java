@@ -2,6 +2,7 @@ package com.gazete_dergi_otomasyon.service;
 
 
 import com.gazete_dergi_otomasyon.dao.IGenreDao;
+import com.gazete_dergi_otomasyon.exception.RecordNotFoundException;
 import com.gazete_dergi_otomasyon.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,6 @@ public class GenreService implements IGenreService {
     public GenreService() {
     }
 
-    public IGenreDao getGenreDao() {
-        return genreDao;
-    }
-
-    public void setGenreDao(IGenreDao genreDao) {
-        this.genreDao = genreDao;
-    }
-
 
     @Override
     @Transactional(readOnly = true)
@@ -37,5 +30,15 @@ public class GenreService implements IGenreService {
     @Transactional
     public void saveGenre(Genre genre) {
             this.genreDao.saveGenre(genre);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Genre getGenreByName(String name) throws RecordNotFoundException {
+      Genre genre = this.genreDao.getGenreByName(name);
+      if(genre != null){
+          return genre;
+      }
+      throw new RecordNotFoundException("Seçtiğiniz tür bulunamadı. Lütfe yeni tür ekleyin!");
     }
 }

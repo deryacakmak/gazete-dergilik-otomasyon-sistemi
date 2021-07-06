@@ -1,12 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-
->
-
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
-
     <title>Journal Upload</title>
     <style type="text/css">
         .BImage{
@@ -15,7 +11,6 @@
             background-repeat: no-repeat;
             background-attachment:fixed;
         }
-
     </style>
 </h:head>
 <h:body styleClass="BImage">
@@ -28,18 +23,19 @@
 
 
             <p:dataTable var="journal" value="#{journalController.allJournal}" rows="10"
+                         emptyMessage="Kayıt Bulunamadı"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         currentPageReportTemplate="{startRecord}-{endRecord}/ {totalRecords} Kayıt"
                          rowsPerPageTemplate="5,10,{ShowAll|'All'}"
-                        >
+            >
 
-            <p:column headerText="Yayın Başlığı" >
-                <h:outputText value="#{journal.title}" />
-            </p:column>
-            <p:column headerText="Yayın Tipi">
-                <h:outputText value="#{journal.type}" />
-            </p:column>
+                <p:column headerText="Yayın Başlığı" >
+                    <h:outputText value="#{journal.title}" />
+                </p:column>
+                <p:column headerText="Yayın Tipi">
+                    <h:outputText value="#{journal.type}" />
+                </p:column>
                 <p:column headerText="Yayın Türü">
                     <h:outputText value="#{journal.genre.genre}" />
                 </p:column>
@@ -58,20 +54,21 @@
 
 
 
-            <p:column>
-                <p:commandButton
-                        icon="ui-icon-trash"
-                                 title="Yayını sil"
-                                 action="#{journalController.removeJournal(journal)}"
-                                  update="journalTableForm">
-                <p:confirm header="Confirmation"
-                           message="Silmek istediğinize emin misiniz?"
-                           icon="pi pi-exclamation-triangle" />
-            </p:commandButton>
+                <p:column>
+                    <p:commandButton
+                            icon="ui-icon-trash"
+                            title="Yayını sil"
+                            action="#{journalController.removeJournal(journal)}"
+                            update="journalTableForm">
+                        <p:confirm header="Confirmation"
+                                   message="Silmek istediğinize emin misiniz?"
+                                   icon="pi pi-exclamation-triangle" />
+                    </p:commandButton>
 
-            </p:column>
 
-        </p:dataTable>
+                </p:column>
+
+            </p:dataTable>
             <p:confirmDialog global="true">
                 <p:commandButton value="Evet" type="button"
                                  styleClass="ui-confirmdialog-yes" icon="pi pi-check" />

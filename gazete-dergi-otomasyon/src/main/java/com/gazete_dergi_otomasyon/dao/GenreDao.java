@@ -1,10 +1,12 @@
 package com.gazete_dergi_otomasyon.dao;
 
 import com.gazete_dergi_otomasyon.model.Genre;
+import com.gazete_dergi_otomasyon.model.Publisher;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,13 +19,6 @@ public class GenreDao implements IGenreDao{
 
     public GenreDao() { }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Override
     public List<Genre> getAllGenre() {
@@ -34,4 +29,20 @@ public class GenreDao implements IGenreDao{
     public void saveGenre(Genre genre) {
         this.sessionFactory.getCurrentSession().save(genre);
     }
+
+    @Override
+    public Genre getGenreByName(String name) {
+        List<Genre> genreList = new ArrayList<Genre>();
+
+        genreList = this.sessionFactory.getCurrentSession()
+                .createQuery("FROM Genre WHERE genre=?")
+                .setParameter(0, name).list();
+
+        if (genreList.size() > 0) {
+            return genreList.get(0);
+        } else {
+            return null;
+        }
+    }
 }
+
