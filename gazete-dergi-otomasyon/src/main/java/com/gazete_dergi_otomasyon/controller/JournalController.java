@@ -4,29 +4,22 @@ package com.gazete_dergi_otomasyon.controller;
 import com.gazete_dergi_otomasyon.dto.JournalEditDto;
 import com.gazete_dergi_otomasyon.dto.UploadJournalDto;
 import com.gazete_dergi_otomasyon.model.*;
-import com.gazete_dergi_otomasyon.service.FileOperationService;
 import com.gazete_dergi_otomasyon.service.IFileOperationService;
 import com.gazete_dergi_otomasyon.service.IJournalService;
-import com.gazete_dergi_otomasyon.util.JournalUploadFacade;
+import com.gazete_dergi_otomasyon.service.JournalUploadFacade;
 import org.hibernate.exception.ConstraintViolationException;
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @Controller
-@ViewScoped
 public class JournalController {
 
     @Autowired
@@ -38,7 +31,6 @@ public class JournalController {
     @Autowired
     private IFileOperationService fileOperationService;
 
-    public JournalController() { }
 
     public String addJournal(UploadJournalDto uploadJournalDto){
         this.journalUploadFacade.addJournal(uploadJournalDto);
@@ -54,8 +46,23 @@ public class JournalController {
     }
 
     public void updateJournal(JournalEditDto journalEditDto, Journal journal){
+        if(journalEditDto.getTitle() == ""){
+            journalEditDto.setTitle(journal.getTitle());
+        }
+        if(journalEditDto.getIssueNumber() == ""){
+            journalEditDto.setIssueNumber(journal.getIssueNumber());
+        }
+        if(journalEditDto.getDate() == null){
+            journalEditDto.setDate(journal.getDate());
+        }
+        if(journalEditDto.getType() == ""){
+            journalEditDto.setType(journal.getType().label);
+        }
         this.journalService.updateJournal(journal, journalEditDto);
         resetUpdateJournalDto(journalEditDto);
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Yayın başarılı bir şekilde güncellendi!", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void removeJournal(Journal journal){
@@ -124,13 +131,4 @@ public class JournalController {
         journalEditDto.setTitle(null);
         journalEditDto.setType(null);
     }
-
-
-
-
-
-
-
-
-
 }

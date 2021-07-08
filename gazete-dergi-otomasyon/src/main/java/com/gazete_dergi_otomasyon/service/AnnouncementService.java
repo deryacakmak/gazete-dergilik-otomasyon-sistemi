@@ -39,12 +39,8 @@ public class AnnouncementService implements IAnnouncementService{
     @Override
     @Transactional
     public void updateAnnouncement(Announcement announcement, AnnouncementEditDto announcementEditDto) {
-        if(announcementEditDto.getContext() != ""){
-            announcement.setContent(announcementEditDto.getContext());
-        }
-        if(announcementEditDto.getTitle() != ""){
-            announcement.setTitle(announcementEditDto.getTitle());
-        }
+        announcement.setContent(announcementEditDto.getContext());
+        announcement.setTitle(announcementEditDto.getTitle());
         this.announcementDao.updateAnnouncement(announcement);
     }
 }

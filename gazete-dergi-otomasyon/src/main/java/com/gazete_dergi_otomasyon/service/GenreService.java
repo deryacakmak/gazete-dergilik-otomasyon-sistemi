@@ -16,9 +16,6 @@ public class GenreService implements IGenreService {
     @Autowired
     private IGenreDao genreDao;
 
-    public GenreService() {
-    }
-
 
     @Override
     @Transactional(readOnly = true)
@@ -39,6 +36,6 @@ public class GenreService implements IGenreService {
       if(genre != null){
           return genre;
       }
-      throw new RecordNotFoundException("Seçtiğiniz tür bulunamadı. Lütfe yeni tür ekleyin!");
+      throw new RecordNotFoundException("Seçtiğiniz tür bulunamadı. Lütfen yeni tür ekleyin!");
     }
 }

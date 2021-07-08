@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "journal", indexes = {@Index(columnList = "title") })
+@Table(name = "journal", indexes = {@Index(columnList = "title", name = "journal_title") })
 public class Journal {
 
     @Id

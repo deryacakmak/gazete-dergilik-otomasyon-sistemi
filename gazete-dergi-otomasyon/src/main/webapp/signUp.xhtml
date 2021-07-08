@@ -46,20 +46,20 @@
 
          <h:outputLabel  class="headline_id"  for="fistName"   />
          <p:inputText id="fistName" value="#{signUpDto.firstName}" placeholder="isim"
-                      required="true" requiredMessage="İsminizi giriniz" />
+                      required="true" requiredMessage="İsminizi giriniz"  autocomplete="off"/>
          <p:message for="fistName" />
 
 
 
          <h:outputLabel  class="headline_id"  for="lastName" />
          <p:inputText id="lastName" value="#{signUpDto.lastName}" placeholder="Soyisim"
-                      required="true" requiredMessage="Soyisminizi girin" />
+                      required="true" requiredMessage="Soyisminizi girin"  autocomplete="off" />
          <p:message for="lastName" />
 
 
          <h:outputLabel  class="headline_id" for="email" />
          <p:inputText    id="email" value="#{signUpDto.email}"  placeholder="Email" validatorMessage="Geçersiz mail adresi formatı"
-                      required="true" requiredMessage="Emailizini girin." />
+                      required="true" requiredMessage="Emailizini girin." autocomplete="off"/>
          <p:message for="email" />
 
 

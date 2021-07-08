@@ -21,10 +21,6 @@ public class UploadJournalDto {
     private String newPublisher;
     private String newGenre;
 
-    public UploadJournalDto() {
-    }
-
-
     public String getNewPublisher() {
         return newPublisher;
     }

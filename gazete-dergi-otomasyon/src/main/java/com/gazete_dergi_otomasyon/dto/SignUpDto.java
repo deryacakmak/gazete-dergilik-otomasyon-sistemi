@@ -12,9 +12,6 @@ public class SignUpDto {
     private String lastName;
     private String password;
 
-    public SignUpDto() {
-    }
-
 
     public String getEmail() {
         return email;

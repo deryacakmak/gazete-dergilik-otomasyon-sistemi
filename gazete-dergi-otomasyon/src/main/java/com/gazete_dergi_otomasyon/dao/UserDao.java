@@ -1,7 +1,10 @@
 package com.gazete_dergi_otomasyon.dao;
 
+import com.gazete_dergi_otomasyon.model.Publisher;
 import com.gazete_dergi_otomasyon.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,22 +19,15 @@ public class UserDao implements IUserDao{
     @Autowired
     private  SessionFactory sessionFactory;
 
-    public UserDao() { }
-
-
-
     @Override
     public User findUserByEmail(String email) {
-        List<User> users = new ArrayList<User>();
-
-        users = this.sessionFactory.getCurrentSession()
-                .createQuery("FROM User WHERE email=?")
-                .setParameter(0, email).list();
-
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
+        Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("email", email));
+        List<User> users = criteria.list();
+        if (users.isEmpty()) {
             return null;
+        } else {
+            return users.get(0);
         }
     }
 

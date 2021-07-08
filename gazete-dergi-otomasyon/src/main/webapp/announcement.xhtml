@@ -2,7 +2,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-
 >
 
 <h:head>
@@ -39,7 +38,7 @@
                          rowsPerPageTemplate="5,10,{ShowAll|'HEPSİ'}"
                          overflow-x= "auto" >
 
-                <p:ajax event="rowEdit" listener="#{announcementController.updateAnnouncement(announcement, announcementEditDto)}"  update=":announcementTableForm:msgs" />
+                <p:ajax event="rowEdit" listener="#{announcementController.updateAnnouncement(announcement, announcementEditDto)}"  />
 
                 <p:column headerText="Başlık">
                     <p:cellEditor>
@@ -71,7 +70,7 @@
                                 icon="ui-icon-trash"
                                 title="Yayını sil"
                                 action="#{announcementController.deleteAnnouncement(announcement)}"
-                                update="announcementTableForm">
+                                update="announcementTable">
                             <p:confirm header="Confirmation"
                                        message="Silmek istediğinize emin misiniz?"
                                        icon="pi pi-exclamation-triangle" />
@@ -81,10 +80,8 @@
 
             </p:dataTable>
 
-            <p:commandButton ajax="false" value="Add new row" process="@this" update="announcementTableForm"
-                             action="#{announcementController.onAddNew()}" oncomplete="PF('announcementTable').addRow();"/>
-
-
+            <p:commandButton ajax="false" value="Yeni Duyuru Ekle" process="@this" update="announcementTable"
+                             actionListener="#{announcementController.onAddNew()}" oncomplete="PF('announcementTable').addRow();"/>
 
 
             <p:confirmDialog global="true">

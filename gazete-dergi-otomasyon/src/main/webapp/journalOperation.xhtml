@@ -1,70 +1,122 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+
+>
+
 <h:head>
-    <title>Journal Upload</title>
+    <title>Journal Show</title>
     <style type="text/css">
         .BImage{
-            background-image:url("resources/images/show2.jpg");
+            background-image:url("resources/images/up9.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment:fixed;
         }
+
+        .ui-datatable .ui-paginator {
+            background:   scroll 50% 30% transparent;
+            border:0;
+        }
+
     </style>
 </h:head>
 <h:body styleClass="BImage">
 
 
     <h:form id="journalTableForm">
-        <p:growl id="message" showDetail="true"/>
+        <p:growl id="msgs" showDetail="true" />
 
         <h:panelGrid style="margin:auto;margin-top:10%; width: 75%" >
 
+            <p:dataTable id= "journalTable" var="journal" value="#{journalController.allJournal}" rows="10"  editable="true"
+                         emptyMessage = "Kayıt Bulunamadı"
 
-            <p:dataTable var="journal" value="#{journalController.allJournal}" rows="10"
-                         emptyMessage="Kayıt Bulunamadı"
+                         style="text-align:center;padding:12px; align-content: unset"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         currentPageReportTemplate="{startRecord}-{endRecord}/ {totalRecords} Kayıt"
-                         rowsPerPageTemplate="5,10,{ShowAll|'All'}"
-            >
+                         currentPageReportTemplate="{startRecord}-{endRecord}/ {totalRecords} kayıt"
+                         rowsPerPageTemplate="5,10,{ShowAll|'HEPSİ'}"
+                         overflow-x= "auto" >
 
-                <p:column headerText="Yayın Başlığı" >
-                    <h:outputText value="#{journal.title}" />
+                <p:ajax event="rowEdit" listener="#{journalController.updateJournal(journalEditDto, journal)}"  update="journalTableForm:msgs" />
+
+                <p:column headerText="Başlık">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{journal.title}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{journalEditDto.title}" style="width:100%" placeholder= "#{journal.title}"
+                        /></f:facet>
+                    </p:cellEditor>
                 </p:column>
-                <p:column headerText="Yayın Tipi">
-                    <h:outputText value="#{journal.type}" />
-                </p:column>
+
                 <p:column headerText="Yayın Türü">
-                    <h:outputText value="#{journal.genre.genre}" />
-                </p:column>
-
-                <p:column headerText="Yayıncı">
-                    <h:outputText value="#{journal.publisher.publisherName}" />
-                </p:column>
-
-                <p:column headerText="Yayın Sayısı">
-                    <h:outputText value="#{journal.issueNumber}" />
-                </p:column>
-
-                <p:column headerText="Yayın Zamanı">
-                    <h:outputText value="#{journal.date}" />
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{journal.type}"/></f:facet>
+                        <f:facet name="input"><p:selectOneRadio id="console"  value="#{journalEditDto.type}" unselectable="true">
+                            <f:selectItem itemLabel="DERGİ" itemValue="Dergi" />
+                            <f:selectItem itemLabel="GAZETE" itemValue="Gazete" />
+                        </p:selectOneRadio></f:facet>
+                    </p:cellEditor>
                 </p:column>
 
 
+                <p:column headerText="Tür">
+                    <p:cellEditor disabled="true">
+                        <f:facet name="output"><h:outputText value="#{journal.genre.genre}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{journalEditDto.genre}" style="width:100%" placeholder= "#{journal.genre.genre}"
+                        /></f:facet>
+                    </p:cellEditor>
+                </p:column>
 
-                <p:column>
-                    <p:commandButton
-                            icon="ui-icon-trash"
-                            title="Yayını sil"
-                            action="#{journalController.removeJournal(journal)}"
-                            update="journalTableForm">
-                        <p:confirm header="Confirmation"
-                                   message="Silmek istediğinize emin misiniz?"
-                                   icon="pi pi-exclamation-triangle" />
-                    </p:commandButton>
 
+                    <p:column headerText="Yayın Sayısı">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{journal.issueNumber}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{journalEditDto.issueNumber}" style="width:100%" placeholder= "#{journal.issueNumber}"
+                            /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Yayıncı">
+                        <p:cellEditor disabled="true">
+                            <f:facet name="output"><h:outputText value="#{journal.publisher.publisherName}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{journalEditDto.publisher}" style="width:100%" placeholder= "#{journal.publisher.publisherName}"
+                            /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+
+                <p:column headerText="Yayın Tarihi">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{journal.date}"/></f:facet>
+                        <f:facet name="input"> <p:datePicker id="event" value="#{journalEditDto.date}"  placeholder="#{journal.date}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+
+
+                <p:column style="width:10rem">
+                    <p:column headerText="Actions">
+                        <p:rowEditor/>
+                        <p:commandButton
+                                style="margin-top: 0px"
+                                icon="ui-icon-trash"
+                                title="Yayını sil"
+                                action="#{journalController.removeJournal(journal)}"
+                                update="journalTableForm">
+                            <p:confirm header="Confirmation"
+                                       message="Silmek istediğinize emin misiniz?"
+                                       icon="pi pi-exclamation-triangle" />
+
+                        </p:commandButton>
+
+        <p:commandButton value="Göster" action="#{journalController.showFile(journal.path)}"
+                         oncomplete="PF('newRequest').show()" />
+
+
+
+                    </p:column>
 
                 </p:column>
 
@@ -76,8 +128,32 @@
                                  styleClass="ui-confirmdialog-no" icon="pi pi-times" />
             </p:confirmDialog>
 
+
+            <p:dialog header="Dialog" widgetVar="dlg1" modal="false">
+                <h:form id="form">
+
+                    <p:messages id="msgs2" />
+
+                    <h:panelGrid columns="1" cellpadding="5">
+
+                        <p:media value="#{journalController.streamedContent}" player="pdf" width="600px" height="300px">
+                        </p:media>
+                        <p:commandButton value="download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+                            <p:fileDownload value="#{journalController.streamedContent}" />
+                        </p:commandButton>
+
+                    </h:panelGrid>
+
+                </h:form>
+            </p:dialog>
+
+
+
+
         </h:panelGrid>
+
     </h:form>
+
 
 </h:body  >
 </html>

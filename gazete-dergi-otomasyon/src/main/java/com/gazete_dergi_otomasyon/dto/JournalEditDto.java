@@ -15,9 +15,6 @@ public class JournalEditDto {
     private String publisher;
     private Date date;
 
-    public JournalEditDto() {
-    }
-
     public Date getDate() {
         return date;
     }

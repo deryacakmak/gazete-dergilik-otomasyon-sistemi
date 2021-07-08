@@ -26,18 +26,8 @@ public class JournalService implements IJournalService {
 
     @Autowired
     private IJournalDao journalDao;
-
-    @Autowired
-    private PublisherDao publisherDao;
-
-    @Autowired
-    private GenreDao genreDao;
-
     @Value("${fileUpload.path}" )
     private String filePath;
-
-    public JournalService() {
-    }
 
 
     @Override
@@ -59,19 +49,10 @@ public class JournalService implements IJournalService {
     @Override
     @Transactional
     public void updateJournal(Journal journal, JournalEditDto journalEditDto) {
-        if(journalEditDto.getTitle() != ""){
-            journal.setTitle(journalEditDto.getTitle());
-        }
-        if(journalEditDto.getIssueNumber() != ""){
-            journal.setIssueNumber(journalEditDto.getIssueNumber());
-        }
-        if(journalEditDto.getDate() != null){
-            journal.setDate(journalEditDto.getDate());
-        }
-        if(journalEditDto.getType() != ""){
-            journal.setType(EType.valueOf(journalEditDto.getType().toUpperCase(Locale.ROOT)));
-        }
-
+        journal.setTitle(journalEditDto.getTitle());
+        journal.setIssueNumber(journalEditDto.getIssueNumber());
+        journal.setDate(journalEditDto.getDate());
+        journal.setType(EType.valueOf(journalEditDto.getType().toUpperCase(Locale.ROOT)));
         this.journalDao.updateJournal(journal);
     }
 

@@ -12,10 +12,6 @@ public class AnnouncementEditDto {
     private String content;
 
 
-    public AnnouncementEditDto() {
-    }
-
-
     public String getTitle() {
         return title;
     }

@@ -1,10 +1,10 @@
 package com.gazete_dergi_otomasyon.dao;
 
 import com.gazete_dergi_otomasyon.model.Announcement;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -12,7 +12,6 @@ public class AnnouncementDao implements IAnnouncementDao{
 
     @Autowired
     private SessionFactory sessionFactory;
-
 
     @Override
     public void addAnnouncement(Announcement announcement) {
@@ -27,7 +26,8 @@ public class AnnouncementDao implements IAnnouncementDao{
 
     @Override
     public List<Announcement> getAllAnnouncement() {
-          return this.sessionFactory.getCurrentSession().createQuery("FROM Announcement").list();
+        Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Announcement.class);
+        return criteria.list();
     }
 
     @Override

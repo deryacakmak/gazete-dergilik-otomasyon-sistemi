@@ -1,28 +1,34 @@
 package com.gazete_dergi_otomasyon.dao;
 
+
 import com.gazete_dergi_otomasyon.model.Genre;
-import com.gazete_dergi_otomasyon.model.Publisher;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 
 @Repository
 public class GenreDao implements IGenreDao{
 
-
     @Autowired
     private SessionFactory sessionFactory;
 
-    public GenreDao() { }
-
-
     @Override
     public List<Genre> getAllGenre() {
-        return this.sessionFactory.getCurrentSession().createQuery("SELECT genre FROM Genre").list();
+        CriteriaBuilder cb = this.sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<Genre> cr = cb.createQuery(Genre.class);
+        Root<Genre> root = cr.from(Genre.class);
+        cr.select(root).where(cb.isNotNull(root.get("genre")));
+        Query<Genre> query = this.sessionFactory.getCurrentSession().createQuery(cr);
+        List<Genre> results = query.getResultList();
+        return results;
     }
 
     @Override
@@ -32,17 +38,13 @@ public class GenreDao implements IGenreDao{
 
     @Override
     public Genre getGenreByName(String name) {
-        List<Genre> genreList = new ArrayList<Genre>();
-
-        genreList = this.sessionFactory.getCurrentSession()
-                .createQuery("FROM Genre WHERE genre=?")
-                .setParameter(0, name).list();
-
-        if (genreList.size() > 0) {
-            return genreList.get(0);
-        } else {
-            return null;
-        }
+        Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Genre.class);
+       criteria.add(Restrictions.eq("genre", name));
+       List<Genre> result = criteria.list();
+       if(result.isEmpty()){
+           return null;
+       }
+       return result.get(0);
     }
 }
 

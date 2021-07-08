@@ -7,7 +7,6 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-
 import java.io.*;
 
 @Service
@@ -18,9 +17,6 @@ public class FileOperationService implements IFileOperationService {
     private String filePath;
     private StreamedContent streamedContent;
     private String selectedFileName;
-
-
-    public FileOperationService() { }
 
     public void uploadFile(UploadedFile uploadedFile, String issueNum) throws IOException {
         byte[] bytes = null;

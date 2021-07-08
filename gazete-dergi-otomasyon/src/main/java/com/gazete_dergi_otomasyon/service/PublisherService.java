@@ -15,8 +15,6 @@ public class PublisherService implements IPublisherService{
     @Autowired
     private IPublisherDao publisherDao;
 
-    public PublisherService() { }
-
     @Override
     @Transactional(readOnly = true)
     public List<Publisher> getAllPublisher() {

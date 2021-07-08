@@ -33,17 +33,17 @@ xmlns:p="http://primefaces.org/ui">
 
 
             <p:outputLabel for="title" styleClass="p-col-fixed" style="width:100px"/>
-            <p:inputText id="title"   required="true" requiredMessage="Yayın başlığını  giriniz"  value="#{uploadJournalDto.title}" placeholder="Yayın Başlığı" />
+            <p:inputText id="title"   required="true" requiredMessage="Yayın başlığını  giriniz"  value="#{uploadJournalDto.title}" placeholder="Yayın Başlığı"  autocomplete="off" />
 
 
 
             <p:outputLabel for="event"/>
-            <p:datePicker id="event" value="#{uploadJournalDto.date}"   required="true" requiredMessage="Tarih seçin"  placeholder="Yayın Tarihini Seçin">
+            <p:datePicker id="event" value="#{uploadJournalDto.date}"   required="true" requiredMessage="Tarih seçin"  placeholder="Yayın Tarihini Seçin"  autocomplete="off">
             </p:datePicker>
 
 
             <p:outputLabel for="issueNumber" styleClass="p-col-fixed" style="width:100px"/>
-            <p:inputText id="issueNumber"    required="true" requiredMessage="Yayın sayısını   giriniz"  value="#{uploadJournalDto.issueNumber}" placeholder="Yayın Sayısı"/>
+            <p:inputText id="issueNumber"    required="true" requiredMessage="Yayın sayısını   giriniz"  value="#{uploadJournalDto.issueNumber}" placeholder="Yayın Sayısı"  autocomplete="off"/>
 
 
 
@@ -53,7 +53,7 @@ xmlns:p="http://primefaces.org/ui">
                 <f:selectItem itemLabel="Yayıncı Seç" itemValue=" "/>
                 <f:selectItems value="#{publisherController.getAllPublisher()}"/>
             </p:selectOneMenu>
-        <p:inputText id="yayıncı" value="#{uploadJournalDto.newPublisher}"  placeholder="Yeni Yayıncı Ekle" />
+        <p:inputText id="yayıncı" value="#{uploadJournalDto.newPublisher}"  placeholder="Yeni Yayıncı Ekle"  autocomplete="off" />
 
 
 
@@ -64,7 +64,7 @@ xmlns:p="http://primefaces.org/ui">
                 <f:selectItem itemLabel="Yayın Türü Seçin" itemValue=" "/>
                 <f:selectItems value="#{genreController.getAllGenre()}"/>
             </p:selectOneMenu>
-        <p:inputText id="tür"  value="#{uploadJournalDto.newGenre}" placeholder="Yeni Tür Ekle" />
+        <p:inputText id="tür"  value="#{uploadJournalDto.newGenre}" placeholder="Yeni Tür Ekle"  autocomplete="off"/>
 
         <p:outputLabel value = "Dosya Yükle"/>
 

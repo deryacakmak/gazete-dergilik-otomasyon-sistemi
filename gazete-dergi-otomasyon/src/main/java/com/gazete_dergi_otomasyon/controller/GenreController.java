@@ -12,12 +12,9 @@ public class GenreController {
     @Autowired
     private IGenreService genreService;
 
-    public GenreController() { }
-
     public List<Genre> getAllGenre(){
         return this.genreService.getAllGenre();
     }
-
 
 
 }

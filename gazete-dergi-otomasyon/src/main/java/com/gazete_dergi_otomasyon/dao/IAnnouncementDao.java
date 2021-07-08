@@ -1,7 +1,6 @@
 package com.gazete_dergi_otomasyon.dao;
 
 import com.gazete_dergi_otomasyon.model.Announcement;
-
 import java.util.List;
 
 public interface IAnnouncementDao {

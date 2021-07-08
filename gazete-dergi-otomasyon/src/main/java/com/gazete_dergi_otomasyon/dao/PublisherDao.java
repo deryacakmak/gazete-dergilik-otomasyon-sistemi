@@ -1,8 +1,11 @@
 package com.gazete_dergi_otomasyon.dao;
 
+import com.gazete_dergi_otomasyon.model.Genre;
 import com.gazete_dergi_otomasyon.model.Publisher;
 import com.gazete_dergi_otomasyon.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,16 +19,12 @@ public class PublisherDao implements IPublisherDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public PublisherDao() { }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
 
     @Override
     public List<Publisher> getAllPublisher() {
-        return this.getSessionFactory().getCurrentSession().createQuery("SELECT publisherName FROM Publisher").list();
+        Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Publisher.class);
+        criteria.add(Restrictions.isNotNull("publisherName"));
+        return criteria.list();
     }
 
     @Override
@@ -35,16 +34,13 @@ public class PublisherDao implements IPublisherDao {
 
     @Override
     public Publisher getPublisherByName(String name) {
-        List<Publisher> publisherList = new ArrayList<Publisher>();
-
-        publisherList = this.sessionFactory.getCurrentSession()
-                .createQuery("FROM Publisher WHERE name=?")
-                .setParameter(0, name).list();
-
-        if (publisherList.size() > 0) {
-            return publisherList.get(0);
-        } else {
+        Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Publisher.class);
+        criteria.add(Restrictions.eq("publisherName", name));
+        List<Publisher> result = criteria.list();
+        if(result.isEmpty()){
             return null;
         }
+        return result.get(0);
+
     }
 }

@@ -8,21 +8,15 @@ import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
 
 @Controller
-@ViewScoped
 public class AccessController {
 
     @Autowired
      private IAccessService accessService;
-
-    public AccessController() {}
 
     public String login(LoginDto loginDto){
         try{
@@ -41,8 +35,8 @@ public class AccessController {
     public String signUp(SignUpDto signUpDto){
             try{
                 this.accessService.signUp(signUpDto.getFirstName(),signUpDto.getLastName(), signUpDto.getEmail(), signUpDto.getPassword());
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
-                        "UYARI","Kaydolma İşlemi Başarılı!");
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        " ","Kaydolma İşlemi Başarılı!");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
                 resetSignUpInputText(signUpDto);
             }
