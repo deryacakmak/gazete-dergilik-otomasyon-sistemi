@@ -41,6 +41,7 @@ public class AnnouncementService implements IAnnouncementService{
     public void updateAnnouncement(Announcement announcement, AnnouncementEditDto announcementEditDto) {
         announcement.setContent(announcementEditDto.getContext());
         announcement.setTitle(announcementEditDto.getTitle());
+        announcement.setPublisher(AccessService.currentUser);
         this.announcementDao.updateAnnouncement(announcement);
     }
 }

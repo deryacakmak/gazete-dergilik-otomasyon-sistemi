@@ -62,6 +62,12 @@
                     </p:cellEditor>
                 </p:column>
 
+                <p:column headerText="Yayınlayan">
+                    <p:cellEditor disabled="true">
+                        <f:facet name="output"><h:outputText value="#{announcement.publisher.firstName}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
                 <p:column style="width:10rem">
                     <p:column headerText="Actions">
                         <p:rowEditor/>
