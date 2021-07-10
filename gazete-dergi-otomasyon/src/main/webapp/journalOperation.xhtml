@@ -32,7 +32,7 @@
 
             <p:dataTable id= "journalTable" var="journal" value="#{journalController.allJournal}" rows="10"  editable="true"
                          emptyMessage = "Kayıt Bulunamadı"
-
+                         allowUnsorting="true" sortMode="single"
                          style="text-align:center;padding:12px; align-content: unset"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -42,7 +42,7 @@
 
                 <p:ajax event="rowEdit" listener="#{journalController.updateJournal(journalEditDto, journal)}"  update="journalTableForm:msgs" />
 
-                <p:column headerText="Başlık">
+                <p:column headerText="Başlık" filterBy="#{journal.title}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{journal.title}"/></f:facet>
                         <f:facet name="input"><p:inputText value="#{journalEditDto.title}" style="width:100%" placeholder= "#{journal.title}"
@@ -50,7 +50,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Yayın Türü">
+                <p:column headerText="Yayın Türü" filterBy="#{journal.type}" >
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{journal.type}"/></f:facet>
                         <f:facet name="input"><p:selectOneRadio id="console"  value="#{journalEditDto.type}" unselectable="true">
@@ -61,7 +61,7 @@
                 </p:column>
 
 
-                <p:column headerText="Tür">
+                <p:column headerText="Tür" filterBy="#{journal.genre.genre}">
                     <p:cellEditor disabled="true">
                         <f:facet name="output"><h:outputText value="#{journal.genre.genre}"/></f:facet>
                         <f:facet name="input"><p:inputText value="#{journalEditDto.genre}" style="width:100%" placeholder= "#{journal.genre.genre}"
@@ -70,7 +70,7 @@
                 </p:column>
 
 
-                <p:column headerText="Yayın Sayısı">
+                <p:column headerText="Yayın Sayısı" filterBy="#{journal.issueNumber}" >
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{journal.issueNumber}"/></f:facet>
                         <f:facet name="input"><p:inputText value="#{journalEditDto.issueNumber}" style="width:100%" placeholder= "#{journal.issueNumber}"
@@ -78,7 +78,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Yayıncı">
+                <p:column headerText="Yayıncı" filterBy="#{journal.publisher.publisherName}">
                     <p:cellEditor disabled="true">
                         <f:facet name="output"><h:outputText value="#{journal.publisher.publisherName}"/></f:facet>
                         <f:facet name="input"><p:inputText value="#{journalEditDto.publisher}" style="width:100%" placeholder= "#{journal.publisher.publisherName}"
@@ -87,7 +87,7 @@
                 </p:column>
 
 
-                <p:column headerText="Yayın Tarihi">
+                <p:column headerText="Yayın Tarihi"  sortBy="#{journal.date}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{journal.date}"/></f:facet>
                         <f:facet name="input"> <p:datePicker id="event" value="#{journalEditDto.date}"  placeholder="#{journal.date}"/></f:facet>
@@ -96,7 +96,7 @@
 
 
 
-                <p:column style="width:10rem">
+                <p:column style="width:10rem" headerText="İşlemler">
                     <p:column headerText="Actions">
                         <p:rowEditor/>
                         <p:commandButton
@@ -119,25 +119,15 @@
                                      actionListener="#{journalController.OnRowSelected(journal.path)}"/>
 
                 </p:column>
-
             </p:dataTable>
 
-
-
-            <p:dialog header="Dialog" widgetVar="dlg1" modal="false">
+            <p:dialog header="Yayın" widgetVar="dlg1" modal="false" resizable="true">
                 <h:form id="form">
-
                     <p:messages id="msgs2" />
-
                     <h:panelGrid columns="1" cellpadding="5">
                             <p:media value="#{journalController.path}" player="pdf" width="650px" height="650px">
-                                Your browser can't display pdf, <h:outputLink
-                                    value="#{request.contextPath}/file/55_2106112200931.pdf">click</h:outputLink> to download pdf instead.
                             </p:media>
-
-
                     </h:panelGrid>
-
                 </h:form>
             </p:dialog>
 
@@ -147,8 +137,6 @@
                 <p:commandButton value="Hayır" type="button"
                                  styleClass="ui-confirmdialog-no" icon="pi pi-times" />
             </p:confirmDialog>
-
-
         </h:panelGrid>
 
     </h:form>
