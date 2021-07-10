@@ -70,21 +70,21 @@
                 </p:column>
 
 
-                    <p:column headerText="Yayın Sayısı">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{journal.issueNumber}"/></f:facet>
-                            <f:facet name="input"><p:inputText value="#{journalEditDto.issueNumber}" style="width:100%" placeholder= "#{journal.issueNumber}"
-                            /></f:facet>
-                        </p:cellEditor>
-                    </p:column>
+                <p:column headerText="Yayın Sayısı">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{journal.issueNumber}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{journalEditDto.issueNumber}" style="width:100%" placeholder= "#{journal.issueNumber}"
+                        /></f:facet>
+                    </p:cellEditor>
+                </p:column>
 
-                    <p:column headerText="Yayıncı">
-                        <p:cellEditor disabled="true">
-                            <f:facet name="output"><h:outputText value="#{journal.publisher.publisherName}"/></f:facet>
-                            <f:facet name="input"><p:inputText value="#{journalEditDto.publisher}" style="width:100%" placeholder= "#{journal.publisher.publisherName}"
-                            /></f:facet>
-                        </p:cellEditor>
-                    </p:column>
+                <p:column headerText="Yayıncı">
+                    <p:cellEditor disabled="true">
+                        <f:facet name="output"><h:outputText value="#{journal.publisher.publisherName}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{journalEditDto.publisher}" style="width:100%" placeholder= "#{journal.publisher.publisherName}"
+                        /></f:facet>
+                    </p:cellEditor>
+                </p:column>
 
 
                 <p:column headerText="Yayın Tarihi">
@@ -115,11 +115,14 @@
                                      class="btn btn-lg btn-primary"
                                      value="Göster"
                                      update="journalTableForm"
-                                     oncomplete="PF('dlg1').show()" />
+                                     oncomplete="PF('dlg1').show()"
+                                     actionListener="#{journalController.OnRowSelected(journal.path)}"/>
 
                 </p:column>
 
             </p:dataTable>
+
+
 
             <p:dialog header="Dialog" widgetVar="dlg1" modal="false">
                 <h:form id="form">
@@ -127,15 +130,11 @@
                     <p:messages id="msgs2" />
 
                     <h:panelGrid columns="1" cellpadding="5">
-
-
-                        <div class="card">
-                            <h5>PDF</h5>
-                            <p:media value="/file/55_2106112200931.pdf" width="650px" height="650px">
+                            <p:media value="#{journalController.path}" player="pdf" width="650px" height="650px">
                                 Your browser can't display pdf, <h:outputLink
                                     value="#{request.contextPath}/file/55_2106112200931.pdf">click</h:outputLink> to download pdf instead.
                             </p:media>
-                        </div>
+
 
                     </h:panelGrid>
 

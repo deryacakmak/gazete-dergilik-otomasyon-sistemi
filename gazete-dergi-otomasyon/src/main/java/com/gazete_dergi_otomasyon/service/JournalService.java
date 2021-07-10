@@ -26,7 +26,7 @@ public class JournalService implements IJournalService {
 
     @Autowired
     private IJournalDao journalDao;
-    @Value("${fileUpload.path}" )
+    @Value("${fileSave.path}" )
     private String filePath;
 
 
@@ -40,8 +40,6 @@ public class JournalService implements IJournalService {
     @Override
     @Transactional
     public void removeJournal(Journal journal) {
-        File file = new File(this.filePath+journal.getPath());
-        file.delete();
         this.journalDao.removeJournal(journal);
 
     }

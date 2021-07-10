@@ -16,6 +16,10 @@ public class FileOperationService implements IFileOperationService {
     @Value("${fileUpload.path}" )
     private String filePath;
 
+    @Value("${fileDelete.path}" )
+    private String fileDeletePath;
+
+
     public void uploadFile(UploadedFile uploadedFile, String issueNum) throws IOException {
         byte[] bytes = null;
         if (null != uploadedFile) {
@@ -28,7 +32,11 @@ public class FileOperationService implements IFileOperationService {
         }
     }
 
-
+    @Override
+    public void removeFile(String path) {
+        File file = new File(this.fileDeletePath+ path);
+        file.delete();
+    }
 
 
 }

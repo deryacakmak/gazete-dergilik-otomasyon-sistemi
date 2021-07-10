@@ -31,6 +31,15 @@ public class JournalController {
     @Autowired
     private IFileOperationService fileOperationService;
 
+    private String path = "";
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public String addJournal(UploadJournalDto uploadJournalDto){
         this.journalUploadFacade.addJournal(uploadJournalDto);
@@ -67,6 +76,7 @@ public class JournalController {
 
     public void removeJournal(Journal journal){
         this.journalService.removeJournal(journal);
+        this.fileOperationService.removeFile(journal.getPath());
     }
 
 
@@ -116,5 +126,10 @@ public class JournalController {
         journalEditDto.setIssueNumber(null);
         journalEditDto.setTitle(null);
         journalEditDto.setType(null);
+    }
+
+    public void OnRowSelected(String path){
+        setPath(path);
+        System.out.println(this.path);
     }
 }
