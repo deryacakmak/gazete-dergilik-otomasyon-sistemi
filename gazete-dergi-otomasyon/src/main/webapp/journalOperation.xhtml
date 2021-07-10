@@ -105,29 +105,21 @@
                                 title="Yayını sil"
                                 action="#{journalController.removeJournal(journal)}"
                                 update="journalTableForm">
-                            <p:confirm header="Confirmation"
+                            <p:confirm header="Uyarı"
                                        message="Silmek istediğinize emin misiniz?"
                                        icon="pi pi-exclamation-triangle" />
 
                         </p:commandButton>
-
-        <p:commandButton value="Göster" action="#{journalController.showFile(journal.path)}"
-                         oncomplete="PF('newRequest').show()" />
-
-
-
                     </p:column>
+                    <p:commandButton id="newRequestButton"
+                                     class="btn btn-lg btn-primary"
+                                     value="Göster"
+                                     update="journalTableForm"
+                                     oncomplete="PF('dlg1').show()" />
 
                 </p:column>
 
             </p:dataTable>
-            <p:confirmDialog global="true">
-                <p:commandButton value="Evet" type="button"
-                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                <p:commandButton value="Hayır" type="button"
-                                 styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-            </p:confirmDialog>
-
 
             <p:dialog header="Dialog" widgetVar="dlg1" modal="false">
                 <h:form id="form">
@@ -136,18 +128,26 @@
 
                     <h:panelGrid columns="1" cellpadding="5">
 
-                        <p:media value="#{journalController.streamedContent}" player="pdf" width="600px" height="300px">
-                        </p:media>
-                        <p:commandButton value="download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
-                            <p:fileDownload value="#{journalController.streamedContent}" />
-                        </p:commandButton>
+
+                        <div class="card">
+                            <h5>PDF</h5>
+                            <p:media value="/file/55_2106112200931.pdf" width="650px" height="650px">
+                                Your browser can't display pdf, <h:outputLink
+                                    value="#{request.contextPath}/file/55_2106112200931.pdf">click</h:outputLink> to download pdf instead.
+                            </p:media>
+                        </div>
 
                     </h:panelGrid>
 
                 </h:form>
             </p:dialog>
 
-
+            <p:confirmDialog global="true">
+                <p:commandButton value="Evet" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                <p:commandButton value="Hayır" type="button"
+                                 styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
 
 
         </h:panelGrid>

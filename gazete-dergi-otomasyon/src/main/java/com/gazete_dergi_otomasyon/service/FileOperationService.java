@@ -15,8 +15,6 @@ public class FileOperationService implements IFileOperationService {
 
     @Value("${fileUpload.path}" )
     private String filePath;
-    private StreamedContent streamedContent;
-    private String selectedFileName;
 
     public void uploadFile(UploadedFile uploadedFile, String issueNum) throws IOException {
         byte[] bytes = null;
@@ -30,43 +28,6 @@ public class FileOperationService implements IFileOperationService {
         }
     }
 
-    public void onRowSelect(String fileName) {
-        selectedFileName = fileName;
-        createStream(fileName);
-    }
-
-    private StreamedContent createStream(String fileName) {
-        streamedContent = new DefaultStreamedContent(getData(fileName), "application/pdf", "downloaded_" + fileName);
-        return streamedContent;
-    }
-
-    private InputStream getData(String fileName) {
-        File file = new File( fileName);
-        InputStream is = null;
-        try {
-            is = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return is;
-    }
-
-    public StreamedContent getStreamedContent() {
-        return streamedContent;
-    }
-
-    public void setStreamedContent(StreamedContent streamedContent) {
-        this.streamedContent = streamedContent;
-    }
-
-    public void refreshStream() {
-        createStream(selectedFileName);
-    }
-
-    public String generateRandomIdForNotCaching() {
-        return java.util.UUID.randomUUID().toString();
-    }
 
 
 

@@ -8,8 +8,5 @@ import java.io.IOException;
 public interface IFileOperationService {
 
      void uploadFile(UploadedFile uploadedFile, String issueNum) throws IOException;
-     void onRowSelect(String fileName);
-     StreamedContent getStreamedContent();
-     void setStreamedContent(StreamedContent streamedContent);
 
 }

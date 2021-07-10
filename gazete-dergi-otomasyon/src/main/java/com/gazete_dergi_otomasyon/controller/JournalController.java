@@ -94,20 +94,6 @@ public class JournalController {
 
     }
 
-    public void showFile(String fileName){
-        this.fileOperationService.onRowSelect(fileName);
-    }
-
-    public StreamedContent getStreamedContent(){
-        return this.fileOperationService.getStreamedContent();
-    }
-
-
-    public void setStreamedContent(StreamedContent streamedContent){
-         this.fileOperationService.setStreamedContent(streamedContent);
-    }
-
-
 
     private void  resetInputText(UploadJournalDto uploadJournalDto){
         uploadJournalDto.setTitle(null);
