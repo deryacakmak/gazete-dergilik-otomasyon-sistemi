@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+
+>
+
+<h:head>
+    <title>Journal Show</title>
+    <style type="text/css">
+        .BImage{
+            background-image:url("resources/images/up9.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+        }
+
+        .ui-datatable .ui-paginator {
+            background:   scroll 50% 30% transparent;
+            border:0;
+        }
+
+    </style>
+</h:head>
+<h:body styleClass="BImage">
+
+
+    <h:form id="memberTableForm">
+        <p:growl id="msgs" showDetail="true" />
+
+        <h:panelGrid style="margin:auto;margin-top:10%; width: 75%" >
+
+            <p:dataTable id= "memberTable" var="user" value="#{userController.allUser}" rows="10"
+                         emptyMessage = "Kayıt Bulunamadı"
+                         style="text-align:center;padding:12px; align-content: unset"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord}/ {totalRecords} kayıt"
+                         rowsPerPageTemplate="5,10,{ShowAll|'HEPSİ'}"
+                         overflow-x= "auto"
+                         selection="#{userController.selectedUser}"
+                         selectionMode="single"
+                         rowKey="#{user.firstName}">
+
+                <p:ajax event="rowSelect"  update=":memberTableForm:memberDetail"
+                        oncomplete="PF('userDialog').show()"/>
+
+                <p:column headerText="İsim" filterBy="#{user.firstName}">
+
+                        <h:outputText value="#{user.firstName}"/>
+                </p:column>
+
+                <p:column headerText="Soyisim" filterBy="#{user.lastName}">
+                        <h:outputText value="#{user.lastName}"/>
+                </p:column>
+
+                <p:column style="width:10rem" headerText="İşlemler">
+                    <p:column headerText="Actions">
+                        <p:commandButton
+                                style="margin-top: 0px"
+                                icon="ui-icon-trash"
+                                title="Üyeyi Sil"
+                                action="#{userController.removeUser(user)}"
+                                update="memberTableForm">
+                            <p:confirm header="Uyarı"
+                                       message="Silmek istediğinize emin misiniz?"
+                                       icon="pi pi-exclamation-triangle" />
+
+                        </p:commandButton>
+                    </p:column>
+                </p:column>
+            </p:dataTable>
+
+            <p:confirmDialog global="true">
+                <p:commandButton value="Evet" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                <p:commandButton value="Hayır" type="button"
+                                 styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
+
+
+
+            <p:dialog header="Üye Detayı" widgetVar="userDialog" modal="true" showEffect="fade"
+                      hideEffect="fade" resizable="false">
+                <p:outputPanel id="memberDetail" style="text-align:center;">
+                    <p:panelGrid columns="2"
+                                 columnClasses="label,value">
+
+                        <h:outputText value="İsim:"/>
+                        <h:outputText value="#{userController.selectedUser.firstName}"/>
+
+                        <h:outputText value="Soyisim:"/>
+                        <h:outputText value="#{userController.selectedUser.lastName}"/>
+
+                        <h:outputText value="Email:"/>
+                        <h:outputText value="#{userController.selectedUser.email}"/>
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+
+
+
+
+
+
+
+
+        </h:panelGrid>
+
+    </h:form>
+
+
+</h:body  >
+</html>

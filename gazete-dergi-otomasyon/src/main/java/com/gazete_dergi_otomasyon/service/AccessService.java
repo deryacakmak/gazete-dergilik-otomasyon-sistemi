@@ -1,5 +1,6 @@
 package com.gazete_dergi_otomasyon.service;
 
+import com.gazete_dergi_otomasyon.dao.IRoleDao;
 import com.gazete_dergi_otomasyon.dao.IUserDao;
 import com.gazete_dergi_otomasyon.model.ERole;
 import com.gazete_dergi_otomasyon.model.Role;
@@ -18,7 +19,12 @@ public class AccessService implements IAccessService {
     @Autowired
     private IUserDao userDao;
 
+    @Autowired
+    private IRoleDao roleDao;
+
     public static User currentUser;
+
+
 
     @Override
     @Transactional(readOnly = true)
@@ -43,7 +49,7 @@ public class AccessService implements IAccessService {
             throw new AccessException("Bu mail adresi kullanılıyor!");
         }
             User newUser = new User(firstName, lastName, email, Encryption.MD5(password));
-            Role role = new Role(ERole.ROLE_MEMBER);
+            Role role = this.roleDao.getRole(ERole.ROLE_MEMBER);
             newUser.getRole().add(role);
             this.userDao.saveUser(newUser);
     }
